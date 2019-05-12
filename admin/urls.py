@@ -18,6 +18,7 @@ from django.urls import path
 from django.conf.urls import include
 
 urlpatterns = [
+    path('api/requests/', include('request.urls')),
     path('api/history/', include('history.urls')),
     path('api/banlist/', include('banlist.urls')),
     path('api/entertainment/', include('entertainment.urls')),

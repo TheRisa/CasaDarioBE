@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'entertainment.apps.EntertainmentConfig',
     'banlist.apps.BanlistConfig',
     'history.apps.HistoryConfig',
+    'request.apps.RequestConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

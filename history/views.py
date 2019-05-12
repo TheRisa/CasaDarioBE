@@ -6,7 +6,7 @@ from .models import History
 
 """
 /api/history/
-Home di api entertainment, non fa nulla tranne render
+Home di api history, non fa nulla tranne render
 """
 
 
