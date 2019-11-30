@@ -60,6 +60,32 @@ def getUser(request, userName):
 
 
 """
+/api/user/getalluser
+Restituisce tutti gli utenti
+return json di tutti i dati degli utenti
+"""
+
+
+def getAllUsers(request):
+    try:
+        users = User.objects.all()
+    except (User.DoesNotExist, DatabaseError):
+        return JsonResponse({'response': ''})
+    returnValue = []
+    for user in users:
+        tmpuser = {
+            'userName': user.userName,
+            'firstName': user.firstName,
+            'lastName': user.lastName,
+            'totalPoint': user.totalPoint,
+            'monthPoint': user.monthPoint,
+            'gayPoint': user.gayPoint
+        }
+        returnValue.append(tmpuser)
+    return JsonResponse({'response': returnValue})
+
+
+"""
 /api/user/createuser/<username>/<password>/<firstName>/<lastName>
 Aggiunge al db un nuovo user con i dati passati
 return true se l'utente è stato inserito

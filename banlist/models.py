@@ -8,8 +8,8 @@ lastName: CharField, not blank -> cognome
 
 
 class BanList(models.Model):
-    firstName = models.CharField("Nome evento", max_length=50, blank=False)
-    lastName = models.CharField("Nome evento", max_length=50, blank=False)
+    firstName = models.CharField("Nome", max_length=50, blank=False)
+    lastName = models.CharField("Cognome", max_length=50, blank=False)
 
     def __str__(self):
         return self.firstName + ' ' + self.lastName

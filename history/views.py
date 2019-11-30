@@ -12,3 +12,19 @@ Home di api entertainment, non fa nulla tranne render
 
 def api(request):
     return HttpResponse("Benvenuto nel back office di CasaDario, sezione History api.")
+
+
+def getAllHistory(request):
+    try:
+        histories = History.objects.all()
+    except (History.DoesNotExists, DatabaseError):
+        return JsonResponse({'response': ''})
+    returnValue = []
+    for history in histories:
+        tmpHistory = {
+            'name': history.name,
+            'event': history.event,
+            'date': history.date
+        }
+        returnValue.append(tmpHistory)
+    return JsonResponse({'response': returnValue})
