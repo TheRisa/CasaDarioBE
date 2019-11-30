@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'user.apps.UserConfig',
+    'askme.apps.AskmeConfig',
     'event.apps.EventConfig',
     'didyouknow.apps.DidyouknowConfig',
     'entertainment.apps.EntertainmentConfig',
