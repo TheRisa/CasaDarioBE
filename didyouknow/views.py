@@ -17,7 +17,7 @@ def api(request):
     try:
         curiosity = Curiosity.objects.all()
     except DatabaseError:
-        return JsonResponse({'response': ''})
+        return JsonResponse({'response': False})
     response = {'response': curiosity[random.randint(
         0, curiosity.count() - 1)].curiosityText}
     return JsonResponse(response)

@@ -18,7 +18,7 @@ def getAllHistory(request):
     try:
         histories = History.objects.all()
     except (History.DoesNotExists, DatabaseError):
-        return JsonResponse({'response': ''})
+        return JsonResponse({'response': False})
     returnValue = []
     for history in histories:
         tmpHistory = {

@@ -47,7 +47,7 @@ def getUser(request, userName):
     try:
         user = User.objects.get(userName=userName)
     except (User.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': ''})
+        return JsonResponse({'response': False})
     return JsonResponse({'response': {
         'userName': user.userName,
         'password': user.password,
@@ -70,7 +70,7 @@ def getAllUsers(request):
     try:
         users = User.objects.all()
     except (User.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': ''})
+        return JsonResponse({'response': False})
     returnValue = []
     for user in users:
         tmpuser = {

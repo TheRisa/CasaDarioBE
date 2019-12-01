@@ -27,7 +27,7 @@ def getEntertainmentByType(request, type):
         typeName = EnterteinmentType.objects.get(type=type)
         entertainment = Enterteinment.objects.filter(type=typeName)
     except (Enterteinment.DoesNotExist, EnterteinmentType.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': ''})
+        return JsonResponse({'response': False})
     listOfGame = []
     for ent in entertainment:
         game = {'name': ent.name,
@@ -49,7 +49,7 @@ def getEntertainmentTypes(request):
     try:
         types = EnterteinmentType.objects.all()
     except DatabaseError:
-        return JsonResponse({'response': ''})
+        return JsonResponse({'response': False})
     listOfTypes = []
     for t in types:
         listOfTypes.append(t.type)
@@ -69,7 +69,7 @@ def getEntertainmentByName(request, name):
         entertainment = Enterteinment.objects.get(name=name)
         typeName = EnterteinmentType.objects.get(type=entertainment.type)
     except (Enterteinment.DoesNotExist, EnterteinmentType.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': ''})
+        return JsonResponse({'response': False})
     response = {'response': {
         'name': entertainment.name,
         'type': typeName.type,

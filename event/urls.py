@@ -3,5 +3,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.api, name='api')
+    path('', views.api, name='api'),
+    path('getEvents', views.getAllEvents, name='getAllEvents')
 ]
