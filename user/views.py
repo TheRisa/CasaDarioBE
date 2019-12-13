@@ -50,8 +50,9 @@ def getUser(request, userName):
         return JsonResponse({'response': False})
     return JsonResponse({'response': {
         'userName': user.userName,
-        'password': user.password,
+        'description': user.description,
         'firstName': user.firstName,
+        'id': user.id,
         'lastName': user.lastName,
         'totalPoint': user.totalPoint,
         'mothPoint': user.monthPoint,
@@ -79,6 +80,8 @@ def getAllUsers(request):
             'lastName': user.lastName,
             'totalPoint': user.totalPoint,
             'monthPoint': user.monthPoint,
+            'description': user.description,
+            'id': user.id,
             'gayPoint': user.gayPoint
         }
         returnValue.append(tmpuser)

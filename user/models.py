@@ -12,6 +12,8 @@ class User(models.Model):
     totalPoint = models.IntegerField("Presenze totali", default=0)
     monthPoint = models.IntegerField("Presenze questo mese", default=0)
     gayPoint = models.IntegerField("Punti gay", default=0)
+    description = models.CharField(
+        "Descrizione utente", max_length=50, blank=True)
     #profileImg = models.ImageField("Immagine profilo", upload_to=None, height_field=None, width_field=None, max_length=None)
 
     def __str__(self):

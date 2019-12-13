@@ -23,9 +23,9 @@ def addInvite(request, userId, eventId):
         invite.event = event
         invite.user = user
         invite.save()
-        return JsonResponse({'response': True})
     except (Invite.DoesNotExist, User.DoesNotExist, Event.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
+    return JsonResponse({'response': True})
 
 
 def getInvitedUser(request, eventId):
