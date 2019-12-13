@@ -26,6 +26,7 @@ SECRET_KEY = ')4p0!2ylp3_ui+lt4qx$zt_o!tasuyt+yfs*$ouscoheslm=t2'
 DEBUG = True
 
 ALLOWED_HOSTS = ['polar-tundra-64747.herokuapp.com', '127.0.0.1']
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'admin.urls'
