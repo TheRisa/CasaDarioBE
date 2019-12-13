@@ -25,7 +25,7 @@ SECRET_KEY = ')4p0!2ylp3_ui+lt4qx$zt_o!tasuyt+yfs*$ouscoheslm=t2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [polar-tundra-64747.herokuapp.com]
 
 
 # Application definition
