@@ -4,4 +4,4 @@ django-heroku
 djangorestframework
 markdown
 django-filter
-django-cors-headers
+django-cors-middleware
