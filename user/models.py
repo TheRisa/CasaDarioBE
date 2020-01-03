@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # TODO: img profilo
 
@@ -14,6 +15,8 @@ class User(models.Model):
     gayPoint = models.IntegerField("Punti gay", default=0)
     description = models.CharField(
         "Descrizione utente", max_length=50, blank=True)
+    lastDate = models.DateField(
+        auto_now=False, auto_now_add=False, blank=True, default=datetime.date.today)
     #profileImg = models.ImageField("Immagine profilo", upload_to=None, height_field=None, width_field=None, max_length=None)
 
     def __str__(self):

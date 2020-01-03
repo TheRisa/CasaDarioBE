@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from django.db import DatabaseError
 from django.core import serializers
 
+import datetime
+
 import json
 import urllib.request
 
@@ -106,3 +108,31 @@ def createUser(request, userName, psw, firstName, lastName):
     except DatabaseError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
+
+
+def getLastLogin(request, userName):
+    try:
+        user = User.objects.get(userName=userName)
+    except (User.DoesNotExist, DatabaseError):
+        return JsonResponse({'response': False})
+    return JsonResponse({'responce': user.lastDate})
+
+
+def updateLastLogin(request, userName):
+    try:
+        user = User.objects.get(userName=userName)
+        user.lastDate = datetime.date.today()
+        user.save()
+    except (User.DoesNotExist, DatabaseError):
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': user.lastDate})
+
+
+def updateTotalPoint(request, userName):
+    try:
+        user = User.objects.get(userName=userName)
+        user.totalPoint = user.totalPoint + 1
+        user.save()
+    except (User.DoesNotExist, DatabaseError):
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': user.totalPoint})
