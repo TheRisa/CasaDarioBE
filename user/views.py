@@ -115,7 +115,7 @@ def getLastLogin(request, userName):
         user = User.objects.get(userName=userName)
     except (User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    return JsonResponse({'responce': user.lastDate})
+    return JsonResponse({'response': user.lastDate})
 
 
 def updateLastLogin(request, userName):
@@ -132,6 +132,7 @@ def updateTotalPoint(request, userName):
     try:
         user = User.objects.get(userName=userName)
         user.totalPoint = user.totalPoint + 1
+        user.monthPoint = user.monthPoint + 1
         user.save()
     except (User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
