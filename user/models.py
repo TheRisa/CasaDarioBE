@@ -17,7 +17,8 @@ class User(models.Model):
         "Descrizione utente", max_length=50, blank=True)
     lastDate = models.DateField(
         auto_now=False, auto_now_add=False, blank=True, default=datetime.date.today)
-    #profileImg = models.ImageField("Immagine profilo", upload_to=None, height_field=None, width_field=None, max_length=None)
+    profileImg = models.TextField(
+        "Url immagine Profilo", blank=True, default="https://i.ibb.co/vPgmQyf/single-user.png")
 
     def __str__(self):
         return self.userName

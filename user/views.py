@@ -137,3 +137,11 @@ def updateTotalPoint(request, userName):
     except (User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     return JsonResponse({'response': user.totalPoint})
+
+
+def getProfileImg(request, userName):
+    try:
+        user = User.objects.get(userName=userName)
+    except (User.DoesNotExist, DatabaseError):
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': user.profileImg})
