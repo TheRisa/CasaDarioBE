@@ -38,3 +38,14 @@ def getInvitedUser(request, eventId):
     for invite in invites:
         response.append(invite.user.userName)
     return JsonResponse({'response': response})
+
+
+def deleteOldInvites(request, eventId):
+    try:
+        event = Event.objects.get(id=eventId)
+        invites = Invite.objects.filter(event=event)
+    except (Event.DoesNotExist, DatabaseError):
+        return JsonResponse({'response': False})
+    for invite in invites:
+        invite.delete()
+    return JsonResponse({'response': True})

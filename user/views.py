@@ -84,7 +84,8 @@ def getAllUsers(request):
             'monthPoint': user.monthPoint,
             'description': user.description,
             'id': user.id,
-            'gayPoint': user.gayPoint
+            'gayPoint': user.gayPoint,
+            'profileImg': user.profileImg
         }
         returnValue.append(tmpuser)
     return JsonResponse({'response': returnValue})

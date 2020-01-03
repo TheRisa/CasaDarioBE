@@ -59,3 +59,23 @@ def createEvent(request):
     except (DatabaseError):
         return JsonResponse({'response': False})
     return JsonResponse({'response': event.id})
+
+
+@api_view(['POST'])
+@parser_classes([JSONParser])
+def updateEvent(request, eventId):
+    try:
+        event = Event.objects.get(id=eventId)
+        event.name = request.data['name']
+        event.description = request.data['description']
+        event.place = request.data['place']
+        event.date = request.data['date']
+        event.initHour = request.data['initHour']
+        event.type = request.data['type']
+        user = User.objects.get(userName=request.data['creator'])
+        event.creator = user
+        event.save()
+
+    except (DatabaseError):
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': event.id})
