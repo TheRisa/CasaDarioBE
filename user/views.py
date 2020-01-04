@@ -71,7 +71,7 @@ return json di tutti i dati degli utenti
 
 def getAllUsers(request):
     try:
-        users = User.objects.all()
+        users = User.objects.all().order_by('-totalPoint', '-monthPoint')
     except (User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     returnValue = []
