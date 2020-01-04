@@ -18,7 +18,7 @@ class User(models.Model):
     lastDate = models.DateField(
         auto_now=False, auto_now_add=False, blank=True, default=datetime.date.today)
     profileImg = models.TextField(
-        "Url immagine Profilo", blank=True, default="http://localhost:8000/static/image/casadario/profile/profile-default.png")
+        "Url immagine Profilo", blank=True, default="https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png")
 
     def __str__(self):
         return self.userName
