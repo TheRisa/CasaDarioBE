@@ -24,7 +24,8 @@ def getAllHistory(request):
         tmpHistory = {
             'name': history.name,
             'event': history.event,
-            'date': history.date
+            'date': history.date,
+            'img': history.img
         }
         returnValue.append(tmpHistory)
     return JsonResponse({'response': returnValue})

@@ -12,6 +12,8 @@ class History(models.Model):
                             max_length=50, blank=False, unique=True)
     event = models.TextField("Descrizione della storia", blank=False)
     date = models.DateField(auto_now=False, auto_now_add=False, blank=True)
+    img = models.TextField(
+        "Url immagine", blank=True, default="http://localhost:8000/static/image/casadario/history/history-default.png")
 
     def __str__(self):
         return self.name
