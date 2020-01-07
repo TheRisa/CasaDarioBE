@@ -13,7 +13,7 @@ class History(models.Model):
     event = models.TextField("Descrizione della storia", blank=False)
     date = models.DateField(auto_now=False, auto_now_add=False, blank=True)
     img = models.TextField(
-        "Url immagine", blank=True, default="http://localhost:8000/static/image/casadario/history/history-default.png")
+        "Url immagine", blank=True, default="https://polar-tundra-64747.herokuapp.com/static/image/casadario/history/history-default.png")
 
     def __str__(self):
         return self.name
