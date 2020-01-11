@@ -114,13 +114,21 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'casadario',
-        'USER': 'admincasadario',
-        'PASSWORD': 'admin1832',
-        'HOST': 'db4free.net',
-        'PORT': '3306',
+        'OPTIONS': {
+            'read_default_file': './mysql_config.cnf'
+        }
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'casadario',
+#         'USER': 'admincasadario',
+#         'PASSWORD': 'admin1832',
+#         'HOST': 'db4free.net',
+#         'PORT': '3306',
+#     }
+# }
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',

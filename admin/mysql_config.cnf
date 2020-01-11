@@ -1,0 +1,6 @@
+[client]
+database = casadario
+user = admincasadario
+password = admin1832
+host = db4free.net:3306
+default-character-set = utf8
