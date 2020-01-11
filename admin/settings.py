@@ -58,6 +58,7 @@ CORS_ALLOW_HEADERS = [
 # Application definition
 
 INSTALLED_APPS = [
+    # 'import_export',
     'user.apps.UserConfig',
     'corsheaders',
     'invite.apps.InviteConfig',
@@ -113,9 +114,9 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'provacasadario',
-        'USER': 'testcasadario',
-        'PASSWORD': 'DC83nta2',
+        'NAME': 'casadario',
+        'USER': 'admincasadario',
+        'PASSWORD': 'admin1832',
         'HOST': 'db4free.net',
         'PORT': '3306',
     }
@@ -126,6 +127,8 @@ DATABASES = {
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
+# IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 
 # Password validation
