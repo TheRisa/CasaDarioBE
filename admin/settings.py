@@ -113,9 +113,9 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'casadario',
-        'USER': 'admincasadario',
-        'PASSWORD': 'admin1832',
+        'NAME': 'provacasadario',
+        'USER': 'testcasadario',
+        'PASSWORD': 'DC83nta2',
         'HOST': 'db4free.net',
         'PORT': '3306',
     }
