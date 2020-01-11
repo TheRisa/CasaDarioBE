@@ -1,7 +1,5 @@
 [client]
-database = casadario
 user = admincasadario
 password = admin1832
-host = db4free.net
-port = 3306
 default-character-set = utf8
+skip-name-resolve

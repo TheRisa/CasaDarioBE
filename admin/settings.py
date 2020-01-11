@@ -114,6 +114,9 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'casadario',
+        'HOST': 'db4free.net',
+        'PORT': '3306',
         'OPTIONS': {
             'read_default_file': './mysql_config.cnf'
         }
