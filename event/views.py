@@ -18,21 +18,6 @@ def api(request):
     return HttpResponse("Benvenuto nel back office di CasaDario, sezione Event api.")
 
 
-def test(request):
-    try:
-        invites = Invite.objects.all()
-    except(invites.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': False})
-    response = []
-    for invite in invites:
-        tmpEvent = {
-            'event': invite.event.name,
-            'user': invite.user.userName
-        }
-        response.append(tmpEvent)
-    return JsonResponse({'response': response})
-
-
 def getAllEvents(request, userNameInput):
     try:
         response = []
@@ -43,7 +28,7 @@ def getAllEvents(request, userNameInput):
     response = []
     for invite in invites:
         tmpEvent = {
-            # 'id': invite.event.event_id,
+            'id': invite.event.event_id,
             'name': invite.event.name,
             'description': invite.event.description,
             'place': invite.event.place,
