@@ -28,7 +28,7 @@ def getAllEvents(request, userNameInput):
     response = []
     for invite in invites:
         tmpEvent = {
-            'id': invite.event.id,
+            # 'id': invite.event.event_id,
             'name': invite.event.name,
             'description': invite.event.description,
             'place': invite.event.place,
