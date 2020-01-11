@@ -29,11 +29,11 @@ def addInvite(request, userId, eventId):
 
 
 def getInvitedUser(request, eventId):
-    # try:
-    event = Event.objects.get(id=eventId)
-    invites = Invite.objects.filter(event=event)
-    # except (Event.DoesNotExist, DatabaseError):
-    #     return JsonResponse({'response': False})
+    try:
+        event = Event.objects.get(id=eventId)
+        invites = Invite.objects.filter(event=event)
+    except (Event.DoesNotExist, DatabaseError):
+        return JsonResponse({'response': False})
     response = []
     for invite in invites:
         response.append(invite.user.userName)
