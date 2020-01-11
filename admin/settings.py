@@ -118,7 +118,7 @@ DATABASES = {
         'HOST': 'db4free.net',
         'PORT': '3306',
         'OPTIONS': {
-            'read_default_file': './mysql_config.cnf'
+            'read_default_file': os.path.join(BASE_DIR, 'mysql_config.cnf'),
         }
     }
 }
