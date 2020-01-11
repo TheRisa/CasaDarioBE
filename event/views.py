@@ -26,8 +26,8 @@ def test(request):
     response = []
     for invite in invites:
         tmpEvent = {
-            'event': invite.event,
-            'user': invite.user
+            'event': invite.event.name,
+            'user': invite.user.userName
         }
         response.append(tmpEvent)
     return JsonResponse({'response': response})
