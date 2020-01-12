@@ -8,7 +8,7 @@ urlpatterns = [
     path('getinvited/<eventId>', views.getInvitedUser, name='getInvited'),
     path('getinvitedAndConfirmed/<eventId>',
          views.getInvitedAndConfirmedUser, name='getInvitedAndConfirmedUser'),
-    path('confirmInvite/<confirmation>/<eventId>/<userId>',
+    path('confirmInvite/<confirmation>/<eventId>/<userName>',
          views.setIsConfirmed, name='setIsConfirmed'),
     path('deleteInvites/<eventId>', views.deleteOldInvites, name='deleteInvites')
 ]
