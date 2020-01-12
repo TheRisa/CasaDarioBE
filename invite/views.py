@@ -68,7 +68,7 @@ def setIsConfirmed(request, confirmation, eventId, userId):
     try:
         event = Event.objects.get(id=eventId)
         user = User.objects.get(id=userId)
-        invites = invite.objects.filter(event=event, user=user)
+        invites = Invite.objects.filter(event=event, user=user)
     except (Event.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     for invite in invites:
