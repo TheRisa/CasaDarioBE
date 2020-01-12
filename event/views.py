@@ -35,7 +35,8 @@ def getAllEvents(request, userNameInput):
             'date': invite.event.date,
             'initHour': invite.event.initHour,
             'type': invite.event.type,
-            'creator': invite.event.creator.userName
+            'creator': invite.event.creator.userName,
+            'isConfirmed': invite.isConfirmed
         }
         response.append(tmpEvent)
     return JsonResponse({'response': response})

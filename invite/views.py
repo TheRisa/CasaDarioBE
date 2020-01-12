@@ -40,6 +40,19 @@ def getInvitedUser(request, eventId):
     return JsonResponse({'response': response})
 
 
+def getInvitedAndConfirmedUser(request, eventId):
+    try:
+        event = Event.objects.get(id=eventId)
+        invites = Invite.objects.filter(event=event)
+    except (Event.DoesNotExist, DatabaseError):
+        return JsonResponse({'response': False})
+    response = []
+    for invite in invites:
+        if (invite.isConfirmed):
+            response.append(invite.user.userName)
+    return JsonResponse({'response': response})
+
+
 def deleteOldInvites(request, eventId):
     try:
         event = Event.objects.get(id=eventId)
@@ -48,4 +61,17 @@ def deleteOldInvites(request, eventId):
         return JsonResponse({'response': False})
     for invite in invites:
         invite.delete()
+    return JsonResponse({'response': True})
+
+
+def setIsConfirmed(request, confirmation, eventId, userId):
+    try:
+        event = Event.objects.get(id=eventId)
+        user = User.objects.get(id=userId)
+        invite = invite.objects.filter(event=event, user=user)
+    except (Event.DoesNotExist, User.DoesNotExist, DatabaseError):
+        return JsonResponse({'response': False})
+    for invite in invites:
+        invite.isConfirmed = confirmation
+        invite.save()
     return JsonResponse({'response': True})
