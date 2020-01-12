@@ -119,7 +119,7 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {
             'read_default_file': os.path.join(BASE_DIR, 'mysql_config.cnf'),
-        }
+        },
     }
 }
 # DATABASES = {
