@@ -64,10 +64,10 @@ def deleteOldInvites(request, eventId):
     return JsonResponse({'response': True})
 
 
-def setIsConfirmed(request, confirmation, eventId, userId):
+def setIsConfirmed(request, confirmation, eventId, userName):
     try:
         event = Event.objects.get(id=eventId)
-        user = User.objects.get(id=userId)
+        user = User.objects.get(userName=userName)
         invites = Invite.objects.filter(event=event, user=user)
     except (Event.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
