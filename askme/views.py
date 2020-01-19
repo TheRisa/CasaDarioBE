@@ -2,6 +2,8 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.db import DatabaseError
 
+from mongoengine import *
+
 from .models import Todo
 
 """
@@ -22,6 +24,7 @@ return json con boolean flag per la chiamata riuscita
 
 
 def addTodo(request, title, body):
+    connect('casadario')
     todo = Todo()
     todo.title = title
     todo.todo = body
