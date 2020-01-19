@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.db import DatabaseError
 
 
-import pymongo
+from pymongo import MongoClient
 
 from .models import Todo
 
@@ -25,24 +25,24 @@ return json con boolean flag per la chiamata riuscita
 
 
 def addTodo(request, title, body):
-    todo = Todo()
-    todo.title = title
-    todo.todo = body
-    try:
-        todo.save()
-    except DatabaseError:
-        return JsonResponse({'response': False})
-    return JsonResponse({'response': True})
+    # todo = Todo()
+    # todo.title = title
+    # todo.todo = body
+    # try:
+    #     todo.save()
+    # except DatabaseError:
+    #     return JsonResponse({'response': False})
+    # return JsonResponse({'response': True})
 
-    # myclient = pymongo.MongoClient(
-    #     "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
-    # mydb = myclient["casadario"]
-    # mycol = mydb["askme_todo"]
+    myclient = pymongo.MongoClient(
+        "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
+    mydb = myclient["casadario"]
+    mycol = mydb["askme_todo"]
 
-    # mylist = [
-    #     {"name": "Amy", "address": "Apple st 652"},
-    #     {"name": "Hannah", "address": "Mountain 21"},
-    #     {"name": "Michael", "address": "Valley 345"}
-    # ]
+    mylist = [
+        {"name": "Amy", "address": "Apple st 652"},
+        {"name": "Hannah", "address": "Mountain 21"},
+        {"name": "Michael", "address": "Valley 345"}
+    ]
 
-    # mycol.insert_many(mylist)
+    mycol.insert_many(mylist)
