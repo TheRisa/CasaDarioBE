@@ -9,10 +9,7 @@ from .models import Collection
 
 
 def getUser(request):
-    try:
-        collection = Collection.objects.get(id=1)
-    except (Collection.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': False})
+    collection = Collection.objects.get(id=1)
     return JsonResponse({'response': collection.id_user})
 
 
