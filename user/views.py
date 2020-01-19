@@ -58,7 +58,8 @@ def getUser(request, userName):
         'lastName': user.lastName,
         'totalPoint': user.totalPoint,
         'monthPoint': user.monthPoint,
-        'gayPoint': user.gayPoint
+        'gayPoint': user.gayPoint,
+        'prova': user._id
     }})
 
 
