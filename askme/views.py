@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.db import DatabaseError
 
+
 import pymongo
 
 from .models import Todo
