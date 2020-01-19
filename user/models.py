@@ -16,7 +16,7 @@ class User(models.Model):
     description = models.CharField(
         "Descrizione utente", max_length=50, blank=True)
     lastDate = models.DateField(
-        auto_now=False, auto_now_add=False, blank=True, default=datetime.date.today)
+        auto_now=False, auto_now_add=False, blank=True)
     profileImg = models.TextField(
         "Url immagine Profilo", blank=True, default="https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png")
 
