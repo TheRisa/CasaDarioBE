@@ -12,7 +12,7 @@ from pymongo.errors import BulkWriteError
 from pymongo import MongoClient
 
 from .models import User
-from .models import Collection
+from id.models import Collection
 
 """
 /api/user/
