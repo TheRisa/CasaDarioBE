@@ -26,6 +26,7 @@ urlpatterns = [
     path('api/didyouknow/', include('didyouknow.urls')),
     path('api/event/', include('event.urls')),
     path('api/user/', include('user.urls')),
+    path('api/collection/', include('idcounter.urls')),
     path('api/invite/', include('invite.urls')),
     path('api/askme/', include('askme.urls')),
     path('admin/', admin.site.urls),
