@@ -136,7 +136,8 @@ def createUser(request, userName, psw, firstName, lastName):
         ]
         mycol.insert_many(mylist)
     except BulkWriteError as bwe:
-        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+        return JsonResponse({'response': bwe.details})
+        # return JsonResponse({'response': bwe.details["nInserted"] > 0})
     return JsonResponse({'response': True})
 
 
