@@ -121,33 +121,23 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 #         'PASSWORD': 'admin1832'
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'casadario',
-#         'HOST': 'db4free.net',
-#         'PORT': '3306',
-#         'OPTIONS': {
-#             'read_default_file': os.path.join(BASE_DIR, 'mysql_config.cnf'),
-#         },
-#     }
-# }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'casadario',
-#         'USER': 'admincasadario',
-#         'PASSWORD': 'admin1832',
-#         'HOST': 'db4free.net',
-#         'PORT': '3306',
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'casadario',
+        'HOST': 'db4free.net',
+        'PORT': '3306',
+        'OPTIONS': {
+            'read_default_file': os.path.join(BASE_DIR, 'mysql_config.cnf'),
+        },
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # IMPORT_EXPORT_USE_TRANSACTIONS = True
 
