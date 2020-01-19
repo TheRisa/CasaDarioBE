@@ -123,21 +123,21 @@ def createUser(request, userName, psw, firstName, lastName):
 
     # Metodo mongodb
     try:
+        collection = Collection.objects.get(id=1)
         myclient = MongoClient(
             "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
         mydb = myclient["casadario"]
-        mycol = mydb["askme_todo"]
+        mycol = mydb["user_user"]
         mylist = [
             {"firstName": firstName, "lastName": lastName,
                 "userName": userName, "password": psw, "description": '', "gayPoint": 0,
                 "totalPoint": 0, "monthPoint": 0, "profileImg": 'https: // polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png',
-                "lastDate": '2020-01-10T23:00:00.000+00:00'}
+                "lastDate": '2020-01-10T23:00:00.000+00:00', "id": collection.id_user}
 
         ]
         mycol.insert_many(mylist)
     except BulkWriteError as bwe:
-        return JsonResponse({'response': bwe.details})
-        # return JsonResponse({'response': bwe.details["nInserted"] > 0})
+        return JsonResponse({'response': bwe.details["nInserted"] > 0})
     return JsonResponse({'response': True})
 
 
