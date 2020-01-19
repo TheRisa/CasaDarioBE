@@ -12,7 +12,7 @@ from pymongo.errors import BulkWriteError
 from pymongo import MongoClient
 
 from .models import User
-from idcounter.models import Collection
+from idcounter.models import IdCollection
 
 
 """
@@ -123,7 +123,7 @@ def createUser(request, userName, psw, firstName, lastName):
 
     # Metodo mongodb
     try:
-        collection = Collection.objects.get(id=1)
+        collection = IdCollection.objects.get(id=1)
         myclient = MongoClient(
             "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
         mydb = myclient["casadario"]
