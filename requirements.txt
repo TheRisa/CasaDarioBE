@@ -5,4 +5,5 @@ djangorestframework
 markdown
 django-filter
 django-cors-middleware
+djongo
 mysqlclient
