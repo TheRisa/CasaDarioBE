@@ -109,7 +109,7 @@ def createUser(request, userName, psw, firstName, lastName):
     user.totalPoint = 0
     user.monthPoint = 0
     user.profileImg = 'https: // polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png'
-    user.lastDate = '2020-01-10'
+    user.lastDate = datetime.datetime().now()
     try:
         user.save()
     except DatabaseError:
