@@ -8,7 +8,11 @@ import datetime
 import json
 import urllib.request
 
+from pymongo.errors import BulkWriteError
+from pymongo import MongoClient
+
 from .models import User
+from .models import Collection
 
 """
 /api/user/
@@ -58,8 +62,7 @@ def getUser(request, userName):
         'lastName': user.lastName,
         'totalPoint': user.totalPoint,
         'monthPoint': user.monthPoint,
-        'gayPoint': user.gayPoint,
-        'prova': user._id
+        'gayPoint': user.gayPoint
     }})
 
 
@@ -100,20 +103,39 @@ return true se l'utente è stato inserito
 
 
 def createUser(request, userName, psw, firstName, lastName):
-    user = User()
-    user.firstName = firstName
-    user.lastName = lastName
-    user.userName = userName
-    user.password = psw
-    user.description = ''
-    user.gayPoint = 0
-    user.totalPoint = 0
-    user.monthPoint = 0
-    user.profileImg = 'https: // polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png'
+    # Metodo mysql
+    # user = User()
+    # user.firstName = firstName
+    # user.lastName = lastName
+    # user.userName = userName
+    # user.password = psw
+    # user.description = ''
+    # user.gayPoint = 0
+    # user.totalPoint = 0
+    # user.monthPoint = 0
+    # user.profileImg = 'https: // polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png'
+    # try:
+    #     user.save()
+    # except DatabaseError:
+    #     return JsonResponse({'response': False})
+    # return JsonResponse({'response': True})
+
+    # Metodo mongodb
     try:
-        user.save()
-    except DatabaseError:
-        return JsonResponse({'response': False})
+        myclient = MongoClient(
+            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
+        mydb = myclient["casadario"]
+        mycol = mydb["askme_todo"]
+        mylist = [
+            {"firstName": firstName, "lastName": lastName,
+                "userName": userName, "password": psw, "description": '', "gayPoint": 0,
+                "totalPoint": 0, "monthPoint": 0, "profileImg": 'https: // polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png',
+                "lastDate": '2020-01-10T23:00:00.000+00:00'}
+
+        ]
+        mycol.insert_many(mylist)
+    except BulkWriteError as bwe:
+        return JsonResponse({'response': bwe.details["nInserted"] > 0})
     return JsonResponse({'response': True})
 
 

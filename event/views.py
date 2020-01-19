@@ -11,6 +11,7 @@ import urllib.request
 
 from invite.models import Invite
 from .models import Event
+from .models import Collection
 from user.models import User
 
 from pymongo.errors import BulkWriteError
