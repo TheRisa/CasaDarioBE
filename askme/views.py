@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.db import DatabaseError
 
-
+from pymongo.errors import BulkWriteError
 from pymongo import MongoClient
 
 from .models import Todo
@@ -34,15 +34,15 @@ def addTodo(request, title, body):
     #     return JsonResponse({'response': False})
     # return JsonResponse({'response': True})
 
-    myclient = MongoClient(
-        "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
-    mydb = myclient["casadario"]
-    mycol = mydb["askme_todo"]
+    try:
+        myclient = MongoClient(
+            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
+        mydb = myclient["casadario"]
+        mycol = mydb["askme_todo"]
+        mylist = [
+            {"name": "Amy", "address": "Apple st 652"}
 
-    mylist = [
-        {"name": "Amy", "address": "Apple st 652"},
-        {"name": "Hannah", "address": "Mountain 21"},
-        {"name": "Michael", "address": "Valley 345"}
-    ]
-
-    mycol.insert_many(mylist)
+        ]
+        mycol.insert_many(mylist)
+    except BulkWriteError as bwe:
+        return JsonResponse({'response': bwe.details})
