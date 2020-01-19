@@ -34,7 +34,7 @@ def addTodo(request, title, body):
     #     return JsonResponse({'response': False})
     # return JsonResponse({'response': True})
 
-    myclient = pymongo.MongoClient(
+    myclient = MongoClient(
         "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
     mydb = myclient["casadario"]
     mycol = mydb["askme_todo"]
