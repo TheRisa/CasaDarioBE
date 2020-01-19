@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'corsheaders',
     'invite.apps.InviteConfig',
-    'id.apps.IdConfig',
+    'idcounter.apps.IdCounterConfig',
     'askme.apps.AskmeConfig',
     'event.apps.EventConfig',
     'didyouknow.apps.DidyouknowConfig',
