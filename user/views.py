@@ -14,6 +14,7 @@ from pymongo import MongoClient
 from .models import User
 from id.models import Collection
 
+
 """
 /api/user/
 Home di api user, non fa nulla tranne render
