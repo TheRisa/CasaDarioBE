@@ -11,7 +11,7 @@ import urllib.request
 
 from invite.models import Invite
 from .models import Event
-from idcounter.models import Collection
+from idcounter.models import IdCollection
 from user.models import User
 
 from pymongo.errors import BulkWriteError
