@@ -7,4 +7,5 @@ django-filter
 django-cors-middleware
 djongo
 mysqlclient
+sqlparse
 pymongo[srv]
