@@ -1,7 +1,5 @@
 from django.db import models
 
-from mongoengine import *
-
 """
 DB per memorizzare le richieste per l'app
 title: CharField, not blank -> titolo richiesta
