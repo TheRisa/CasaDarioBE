@@ -108,7 +108,6 @@ def createUser(request, userName, psw, firstName, lastName):
     user.gayPoint = 0
     user.totalPoint = 0
     user.monthPoint = 0
-    user.lastDate = 0
     user.profileImg = 'https: // polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png'
     try:
         user.save()
