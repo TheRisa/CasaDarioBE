@@ -42,17 +42,17 @@ def logIn(request, userName, psw):
     try:
         user = User.objects.get(userName=userName)
         if (user.password == psw):
-            return JsonResponse({'response': True})
+            return JsonResponse({"response": True})
         else:
-            return JsonResponse({'response': False})
+            return JsonResponse({"response": False})
     except (User.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': False})
+        return JsonResponse({"response": False})
 
 
 """
 /api/user/getuser/<username>
 Cerca username nel db
-return json di tutti i dati dell'utente
+return json di tutti i dati dell"utente
 """
 
 
@@ -60,16 +60,16 @@ def getUser(request, userName):
     try:
         user = User.objects.get(userName=userName)
     except (User.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': False})
-    return JsonResponse({'response': {
-        'userName': user.userName,
-        'description': user.description,
-        'firstName': user.firstName,
-        'id': user.id,
-        'lastName': user.lastName,
-        'totalPoint': user.totalPoint,
-        'monthPoint': user.monthPoint,
-        'gayPoint': user.gayPoint
+        return JsonResponse({"response": False})
+    return JsonResponse({"response": {
+        "userName": user.userName,
+        "description": user.description,
+        "firstName": user.firstName,
+        "id": user.id,
+        "lastName": user.lastName,
+        "totalPoint": user.totalPoint,
+        "monthPoint": user.monthPoint,
+        "gayPoint": user.gayPoint
     }})
 
 
@@ -84,28 +84,28 @@ def getAllUsers(request):
     try:
         users = User.objects.all()
     except (User.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': False})
+        return JsonResponse({"response": False})
     returnValue = []
     for user in users:
         tmpuser = {
-            'userName': user.userName,
-            'firstName': user.firstName,
-            'lastName': user.lastName,
-            'totalPoint': user.totalPoint,
-            'monthPoint': user.monthPoint,
-            'description': user.description,
-            'id': user.id,
-            'gayPoint': user.gayPoint,
-            'profileImg': user.profileImg
+            "userName": user.userName,
+            "firstName": user.firstName,
+            "lastName": user.lastName,
+            "totalPoint": user.totalPoint,
+            "monthPoint": user.monthPoint,
+            "description": user.description,
+            "id": user.id,
+            "gayPoint": user.gayPoint,
+            "profileImg": user.profileImg
         }
         returnValue.append(tmpuser)
-    return JsonResponse({'response': returnValue})
+    return JsonResponse({"response": returnValue})
 
 
 """
 /api/user/createuser/<username>/<password>/<firstName>/<lastName>
 Aggiunge al db un nuovo user con i dati passati
-return true se l'utente è stato inserito
+return true se l"utente è stato inserito
 """
 
 
@@ -116,16 +116,16 @@ def createUser(request, userName, psw, firstName, lastName):
     # user.lastName = lastName
     # user.userName = userName
     # user.password = psw
-    # user.description = ''
+    # user.description = ""
     # user.gayPoint = 0
     # user.totalPoint = 0
     # user.monthPoint = 0
-    # user.profileImg = 'https: // polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png'
+    # user.profileImg = "https: // polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png"
     # try:
     #     user.save()
     # except DatabaseError:
-    #     return JsonResponse({'response': False})
-    # return JsonResponse({'response': True})
+    #     return JsonResponse({"response": False})
+    # return JsonResponse({"response": True})
 
     # Metodo mongodb
     try:
@@ -133,25 +133,23 @@ def createUser(request, userName, psw, firstName, lastName):
         idCol = db["idcounter_idcollection"]
         userCol = db["user_user"]
         newUser = [
-            # {"firstName": firstName, "lastName": lastName,
-            #     "userName": userName, "password": psw, "description": '', "gayPoint": 0,
-            #     "totalPoint": 0, "monthPoint": 0, "profileImg": 'https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png',
-            #     "lastDate": '2020-01-10T23:00:00.000+00:00', "id": idCol["id_user"]}
-            {"userName": userName}
-
+            {"firstName": firstName, "lastName": lastName,
+                "userName": userName, "password": psw, "description": "", "gayPoint": 0,
+                "totalPoint": 0, "monthPoint": 0, "profileImg": "https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png",
+                "lastDate": "2020-01-10T23:00:00.000+00:00", "id": idCol["id_user"]}
         ]
         userCol.insert_many(newUser)
     except BulkWriteError as bwe:
-        return JsonResponse({'response': bwe.details["nInserted"] > 0})
-    return JsonResponse({'response': True})
+        return JsonResponse({"response": bwe.details["nInserted"] > 0})
+    return JsonResponse({"response": True})
 
 
 def getLastLogin(request, userName):
     try:
         user = User.objects.get(userName=userName)
     except (User.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': False})
-    return JsonResponse({'response': user.lastDate})
+        return JsonResponse({"response": False})
+    return JsonResponse({"response": user.lastDate})
 
 
 def updateLastLogin(request, userName):
@@ -160,8 +158,8 @@ def updateLastLogin(request, userName):
         user.lastDate = datetime.date.today()
         user.save()
     except (User.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': False})
-    return JsonResponse({'response': user.lastDate})
+        return JsonResponse({"response": False})
+    return JsonResponse({"response": user.lastDate})
 
 
 def updateTotalPoint(request, userName):
@@ -171,13 +169,13 @@ def updateTotalPoint(request, userName):
         user.monthPoint = user.monthPoint + 1
         user.save()
     except (User.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': False})
-    return JsonResponse({'response': user.totalPoint})
+        return JsonResponse({"response": False})
+    return JsonResponse({"response": user.totalPoint})
 
 
 def getProfileImg(request, userName):
     try:
         user = User.objects.get(userName=userName)
     except (User.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': False})
-    return JsonResponse({'response': user.profileImg})
+        return JsonResponse({"response": False})
+    return JsonResponse({"response": user.profileImg})
