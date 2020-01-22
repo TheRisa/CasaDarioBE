@@ -112,26 +112,26 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'casadario',
-        'HOST': 'mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majority',
-        'USER': 'TheRisa',
-        'PASSWORD': 'admin1832'
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
+#         'ENGINE': 'djongo',
 #         'NAME': 'casadario',
-#         'HOST': 'db4free.net',
-#         'PORT': '3306',
-#         'OPTIONS': {
-#             'read_default_file': os.path.join(BASE_DIR, 'mysql_config.cnf'),
-#         }
+#         'HOST': 'mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majority',
+#         'USER': 'TheRisa',
+#         'PASSWORD': 'admin1832'
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'casadario',
+        'HOST': 'db4free.net',
+        'PORT': '3306',
+        'OPTIONS': {
+            'read_default_file': os.path.join(BASE_DIR, 'mysql_config.cnf'),
+        }
+    }
+}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
