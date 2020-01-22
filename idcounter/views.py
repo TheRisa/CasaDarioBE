@@ -8,6 +8,9 @@ import json
 from pymongo import MongoClient
 from pymongo.errors import BulkWriteError
 
+import pymongo
+from bson.json_util import dumps
+
 from .models import IdCollection
 
 
@@ -21,7 +24,7 @@ def getUser(request):
         collection = mycol.find_one()
     except (IdCollection.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    return JsonResponse({'response': collection})
+    return JsonResponse({'response': dumps(collection)})
 
 
 def incrementUser(request):

@@ -8,4 +8,5 @@ django-cors-middleware
 djongo
 mysqlclient
 sqlparse
+dump
 pymongo[srv]
