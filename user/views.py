@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.db import DatabaseError
 from django.core import serializers
 
-import datetime from datetime
+import datetime
 
 import json
 import urllib.request
@@ -158,7 +158,7 @@ def updateLastLogin(request, userName):
         db = conncet()
         userCol = db["user_user"]
         userCol.update_one(
-            {"userName": userName}, {"$set": {"lastDate": datetime.now()}})
+            {"userName": userName}, {"$set": {"lastDate": datetime.datetime.now().isoformat()}})
     except BulkWriteError as bwe:
         return JsonResponse({'response': bwe.details["nInserted"] > 0})
     return JsonResponse({'response': True})
