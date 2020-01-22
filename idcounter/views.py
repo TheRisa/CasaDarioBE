@@ -44,10 +44,10 @@ def incrementUser(request):
     try:
         mycol = conncet()
         collection = mycol.find_one()
-        newCount = collection['id_user'] + 1
+        newCollection = collection
+        newCollection['id_user'] = collection['id_user'] + 1
         mycol.update_one(
-            collection, {"id": 1, "id_user": newCount, "id_event": collection.id_event,
-                         "id_invite": collection.id_invite})
+            collection, newCollection)
     except BulkWriteError as bwe:
         return JsonResponse({'response': bwe.details["nInserted"] > 0})
     return JsonResponse({'response': True})
