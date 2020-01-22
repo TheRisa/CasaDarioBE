@@ -54,7 +54,7 @@ def getAllEvents(request, userNameInput):
     #     }
     #     response.append(tmpEvent)
     # return JsonResponse({'response': response, 'user': user.id, 'prova': invites.event})
-    return JsonResponse({'prova': invites.event})
+    return JsonResponse({'prova': invites['event']})
 
 
 @api_view(['POST'])
