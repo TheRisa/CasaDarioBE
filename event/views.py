@@ -31,16 +31,17 @@ def getAllEvents(request, userNameInput):
         return JsonResponse({'response': False})
     response = []
     for invite in invites:
+        event = Event.objects.get(id=invite.event)
         tmpEvent = {
-            'id': invite.event.id,
-            'name': invite.event.name,
-            'description': invite.event.description,
-            'place': invite.event.place,
-            'date': invite.event.date,
-            'initHour': invite.event.initHour,
-            'type': invite.event.type,
-            'creator': invite.event.creator.userName,
-            'isConfirmed': invite.isConfirmed
+            'id': event.id,
+            'name': event.name,
+            'description': event.description,
+            'place': event.place,
+            'date': event.date,
+            'initHour': event.initHour,
+            'type': event.type,
+            'creator': event.creator.userName,
+            'isConfirmed': isConfirmed
         }
         response.append(tmpEvent)
     return JsonResponse({'user': user.userName})
