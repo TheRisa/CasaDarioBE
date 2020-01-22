@@ -35,8 +35,10 @@ def getAllEvents(request, userNameInput):
     except(Invite.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     response = []
+    test = 0
     for invite in invites:
         event = Event.objects.get(id=invite.event)
+        test = event.id
         tmpEvent = {
             'id': event.id,
             'name': event.name,
@@ -49,7 +51,7 @@ def getAllEvents(request, userNameInput):
             'isConfirmed': isConfirmed
         }
         response.append(tmpEvent)
-    return JsonResponse({'response': response})
+    return JsonResponse({'response': response, 'user': user.id, 'prova': test})
 
 
 @api_view(['POST'])
