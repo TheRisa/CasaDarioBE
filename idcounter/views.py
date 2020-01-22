@@ -16,9 +16,9 @@ from .models import IdCollection
 def conncet():
     myclient = MongoClient(
             "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
-        mydb = myclient["casadario"]
-        mycol = mydb["idcounter_idcollection"]
-        return mycol
+    mydb = myclient["casadario"]
+    mycol = mydb["idcounter_idcollection"]
+    return mycol
 
 
 def getUser(request):
