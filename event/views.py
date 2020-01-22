@@ -33,7 +33,7 @@ def getAllEvents(request, userNameInput):
         user = User.objects.get(userName=userNameInput)
         db = connect()
         inviteCol = db['invite_invite']
-        invites = inviteCol.find({'user': user['id']})
+        invites = inviteCol.find({'user': user.id})
     except(Invite.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     response = []
