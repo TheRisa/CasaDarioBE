@@ -19,6 +19,9 @@ def getUser(request):
         mydb = myclient["casadario"]
         mycol = mydb["idcounter_idcollection"]
         collection = mycol.find({})
+        response = []
+        for item in collection:
+            response.append(item)
     except (IdCollection.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     return JsonResponse({'response': collection})
