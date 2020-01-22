@@ -33,28 +33,28 @@ def getAllEvents(request, userNameInput):
         user = User.objects.get(userName=userNameInput)
         db = connect()
         inviteCol = db['invite_invite']
-        invites = inviteCol.find_one()
+        invites = inviteCol.find({'user': user['id']})
     except(Invite.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    # response = []
+    response = []
     # test = invites.event
-    # for invite in invites:
-    #     event = Event.objects.get(id=invite.event)
-    #     test = event.id
-    #     tmpEvent = {
-    #         'id': event.id,
-    #         'name': event.name,
-    #         'description': event.description,
-    #         'place': event.place,
-    #         'date': event.date,
-    #         'initHour': event.initHour,
-    #         'type': event.type,
-    #         'creator': event.creator,
-    #         'isConfirmed': isConfirmed
-    #     }
-    #     response.append(tmpEvent)
+    for invite in invites:
+        response.append(invite['event'])
+        # event = Event.objects.get(id=invite.event)
+        # tmpEvent = {
+        #     'id': event.id,
+        #     'name': event.name,
+        #     'description': event.description,
+        #     'place': event.place,
+        #     'date': event.date,
+        #     'initHour': event.initHour,
+        #     'type': event.type,
+        #     'creator': event.creator,
+        #     'isConfirmed': isConfirmed
+        # }
+        # response.append(tmpEvent)
     # return JsonResponse({'response': response, 'user': user.id, 'prova': invites.event})
-    return JsonResponse({'prova': invites['event']})
+    return JsonResponse({'prova': response})
 
 
 @api_view(['POST'])
