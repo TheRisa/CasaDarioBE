@@ -175,6 +175,17 @@ def updateTotalPoint(request, userName):
         return JsonResponse({'response': bwe.details["nInserted"] > 0})
     return JsonResponse({'response': True})
 
+def restMonthPoint(request, userName):
+    try:
+        db = conncet()
+        user = User.objects.get(userName=userName)
+        userCol = db["user_user"]
+        userCol.update_one(
+            {"userName": userName}, {"$set": {"monthPoint": 0}})
+    except BulkWriteError as bwe:
+        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    return JsonResponse({'response': True})
+
 
 def getProfileImg(request, userName):
     try:
