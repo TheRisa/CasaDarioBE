@@ -94,7 +94,7 @@ def getInvite(request):
         collection = mycol.find_one()
     except (IdCollection.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    return JsonResponse({'response': collection.['id_invite']})
+    return JsonResponse({'response': collection['id_invite']})
 
 
 def incrementInvite(request):
