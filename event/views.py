@@ -41,7 +41,7 @@ def getAllEvents(request, userNameInput):
     # test = invites.event
     for invite in invites:
         event = eventCol.find_one({'id': invite['event']})
-        response.append(event.name)
+        response.append(event['name'])
         # tmpEvent = {
         #     'id': event.id,
         #     'name': event.name,
