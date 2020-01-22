@@ -38,7 +38,6 @@ def getAllEvents(request, userNameInput):
     except(Invite.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     response = []
-    # test = invites.event
     for invite in invites:
         event = eventCol.find_one({'id': invite['event']})
         tmpEvent = {
@@ -80,7 +79,6 @@ def createEvent(request):
     try:
         mydb = connect()
         mycol = mydb["event_event"]
-        # TODO: da finire
         mylist = [
             {"name": request.data['name'], "description": request.data['description'],
                 "place": request.data['place'], "date": request.data['date'],
@@ -97,18 +95,36 @@ def createEvent(request):
 @api_view(['POST'])
 @parser_classes([JSONParser])
 def updateEvent(request, eventId):
-    try:
-        event = Event.objects.get(id=eventId)
-        event.name = request.data['name']
-        event.description = request.data['description']
-        event.place = request.data['place']
-        event.date = request.data['date']
-        event.initHour = request.data['initHour']
-        event.type = request.data['type']
-        user = User.objects.get(userName=request.data['creator'])
-        event.creator = user
-        event.save()
+    # Metodo mysql
+    # try:
+    #     event = Event.objects.get(id=eventId)
+    #     event.name = request.data['name']
+    #     event.description = request.data['description']
+    #     event.place = request.data['place']
+    #     event.date = request.data['date']
+    #     event.initHour = request.data['initHour']
+    #     event.type = request.data['type']
+    #     user = User.objects.get(userName=request.data['creator'])
+    #     event.creator = user
+    #     event.save()
 
-    except (DatabaseError):
-        return JsonResponse({'response': False})
-    return JsonResponse({'response': event.id})
+    # except (DatabaseError):
+    #     return JsonResponse({'response': False})
+    # return JsonResponse({'response': event.id})
+
+    # Metodo mongodb
+    try:
+        db = connect()
+        userName = userCol.fin
+        eventCol.update_one({'id': eventId}, {"$set": {
+            "name": request.data['name'],
+            "description": request.data['description'],
+            'place': request.data['place'],
+            'date': request.data['date'],
+            'initHour': request.data['initHour'],
+            'type': request.data['type'],
+            'creator': request.data['creator']
+        }})
+    except BulkWriteError as bwe:
+        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    return JsonResponse({'response': True})
