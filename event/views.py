@@ -116,7 +116,6 @@ def updateEvent(request, eventId):
     try:
         db = connect()
         eventCol = db['event_event']
-        userName = userCol.fin
         eventCol.update_one({'id': eventId}, {"$set": {
             "name": request.data['name'],
             "description": request.data['description'],
