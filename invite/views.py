@@ -16,6 +16,7 @@ def api(request):
 
 
 def addInvite(request, userId, eventId):
+    # TODO:
     try:
         event = Event.objects.get(id=eventId)
         user = User.objects.get(id=userId)
@@ -29,6 +30,7 @@ def addInvite(request, userId, eventId):
 
 
 def getInvitedUser(request, eventId):
+    # TODO: controlla funzionamento
     try:
         event = Event.objects.get(id=eventId)
         invites = Invite.objects.filter(event=event)
@@ -41,6 +43,7 @@ def getInvitedUser(request, eventId):
 
 
 def getInvitedAndConfirmedUser(request, eventId):
+    # TODO: controlla
     try:
         event = Event.objects.get(id=eventId)
         invites = Invite.objects.filter(event=event)
@@ -54,6 +57,7 @@ def getInvitedAndConfirmedUser(request, eventId):
 
 
 def deleteOldInvites(request, eventId):
+    # TODO:
     try:
         event = Event.objects.get(id=eventId)
         invites = Invite.objects.filter(event=event)
@@ -65,6 +69,7 @@ def deleteOldInvites(request, eventId):
 
 
 def setIsConfirmed(request, confirmation, eventId, userName):
+    # TODO: Controlla
     try:
         event = Event.objects.get(id=eventId)
         user = User.objects.get(userName=userName)
