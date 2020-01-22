@@ -18,13 +18,10 @@ def getUser(request):
             "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
         mydb = myclient["casadario"]
         mycol = mydb["idcounter_idcollection"]
-        collection = mycol.find({})
-        response = []
-        for item in collection:
-            response.append(item)
+        collection = mycol.find_one()
     except (IdCollection.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    return JsonResponse({'response': response})
+    return JsonResponse({'response': collection})
 
 
 def incrementUser(request):
