@@ -133,10 +133,11 @@ def createUser(request, userName, psw, firstName, lastName):
         idCol = db["idcounter_idcollection"]
         userCol = db["user_user"]
         newUser = [
-            {"firstName": firstName, "lastName": lastName,
-                "userName": userName, "password": psw, "description": '', "gayPoint": 0,
-                "totalPoint": 0, "monthPoint": 0, "profileImg": 'https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png',
-                "lastDate": '2020-01-10T23:00:00.000+00:00', "id": idCol["id_user"]}
+            # {"firstName": firstName, "lastName": lastName,
+            #     "userName": userName, "password": psw, "description": '', "gayPoint": 0,
+            #     "totalPoint": 0, "monthPoint": 0, "profileImg": 'https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png',
+            #     "lastDate": '2020-01-10T23:00:00.000+00:00', "id": idCol["id_user"]}
+            {"userName": userName}
 
         ]
         userCol.insert_many(newUser)
