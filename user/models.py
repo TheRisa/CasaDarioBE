@@ -13,9 +13,9 @@ class User(models.Model):
     gayPoint = models.IntegerField("Punti gay", default=0)
     description = models.CharField(
         "Descrizione utente", max_length=50, blank=True)
-    lastDate = models.DateTimeField(
-        auto_now=False, auto_now_add=False, blank=True)
-    # lastDate = models.CharField("Ultimo accesso", max_length=50, blank=True)
+    # lastDate = models.DateTimeField(
+    #     auto_now=False, auto_now_add=False, blank=True)
+    lastDate = models.CharField("Ultimo accesso", max_length=50, blank=True)
     profileImg = models.TextField(
         "Url immagine Profilo", blank=True, default="https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png")
 
