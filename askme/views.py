@@ -43,7 +43,6 @@ def addTodo(request, title, body):
         mycol = mydb["askme_todo"]
         mylist = [
             {"title": title, "todo": body}
-
         ]
         mycol.insert_many(mylist)
     except BulkWriteError as bwe:
