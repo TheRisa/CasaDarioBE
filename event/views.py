@@ -43,7 +43,7 @@ def getAllEvents(request, userNameInput):
             'isConfirmed': invite.isConfirmed
         }
         response.append(tmpEvent)
-    return JsonResponse({'response': response})
+    return JsonResponse({'response': response, 'user': user.userName})
 
 
 @api_view(['POST'])
