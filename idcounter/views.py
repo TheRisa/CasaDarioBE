@@ -44,7 +44,8 @@ def incrementUser(request):
     try:
         mycol = conncet()
         collection = mycol.find_one()
-        collection["id_user"] = 23
+        mycol.update_one(
+            {"collection_id": 1}, {"$set": {"id_user": 45}})
     except BulkWriteError as bwe:
         return JsonResponse({'response': bwe.details["nInserted"] > 0})
     return JsonResponse({'response': True})
