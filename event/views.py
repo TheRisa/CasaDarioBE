@@ -46,7 +46,7 @@ def getAllEvents(request, userNameInput):
             'name': event['name'],
             'description': event['description'],
             'place': event['place'],
-            'date': event{'date'},
+            'date': event['date'],
             'initHour': event['initHour'],
             'type': event['type'],
             'creator': event['creator'],
