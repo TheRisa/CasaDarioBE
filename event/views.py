@@ -115,6 +115,7 @@ def updateEvent(request, eventId):
     # Metodo mongodb
     try:
         db = connect()
+        eventCol = db['event_event']
         userName = userCol.fin
         eventCol.update_one({'id': eventId}, {"$set": {
             "name": request.data['name'],
