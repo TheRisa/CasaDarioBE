@@ -155,12 +155,13 @@ def getLastLogin(request, userName):
 
 def updateLastLogin(request, userName):
     try:
-        user = User.objects.get(userName=userName)
-        user.lastDate = datetime.date.today()
-        user.save()
-    except (User.DoesNotExist, DatabaseError):
-        return JsonResponse({"response": False})
-    return JsonResponse({"response": user.lastDate})
+        db = conncet()
+        userCol = db["user_user"]
+        mycol.update_one(
+            {"userName": userName}, {"$set": {"lastDate": datetime.now()}})
+    except BulkWriteError as bwe:
+        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    return JsonResponse({'response': True})
 
 
 def updateTotalPoint(request, userName):
