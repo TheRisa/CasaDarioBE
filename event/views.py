@@ -30,8 +30,10 @@ def conncet():
 
 def getAllEvents(request, userNameInput):
     try:
-        # user = User.objects.get(userName=userNameInput)
-        invites = Invite.objects.get(user=1)
+        user = User.objects.get(userName=userNameInput)
+        db = connect()
+        inviteCol = db['invite_invite']
+        invites = inviteCol.find_one()
     except(Invite.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     # response = []
