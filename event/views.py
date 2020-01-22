@@ -31,24 +31,24 @@ def conncet():
 def getAllEvents(request, userNameInput):
     try:
         user = User.objects.get(userName=userNameInput)
-        # invites = Invite.objects.filter(user=user.userName)
+        invites = Invite.objects.filter(user=user.id)
     except(Invite.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     response = []
-    # for invite in invites:
-    #     event = Event.objects.get(id=invite.event)
-    #     tmpEvent = {
-    #         'id': event.id,
-    #         'name': event.name,
-    #         'description': event.description,
-    #         'place': event.place,
-    #         'date': event.date,
-    #         'initHour': event.initHour,
-    #         'type': event.type,
-    #         'creator': event.creator,
-    #         'isConfirmed': isConfirmed
-    #     }
-    #     response.append(tmpEvent)
+    for invite in invites:
+        event = Event.objects.get(id=invite.event)
+        tmpEvent = {
+            'id': event.id,
+            'name': event.name,
+            'description': event.description,
+            'place': event.place,
+            'date': event.date,
+            'initHour': event.initHour,
+            'type': event.type,
+            'creator': event.creator,
+            'isConfirmed': isConfirmed
+        }
+        response.append(tmpEvent)
     return JsonResponse({'user': user.userName})
 
 
