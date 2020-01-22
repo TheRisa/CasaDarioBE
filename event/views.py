@@ -26,7 +26,7 @@ def getAllEvents(request, userNameInput):
     try:
         response = []
         user = User.objects.get(userName=userNameInput)
-        invites = Invite.objects.filter(user=user)
+        invites = Invite.objects.filter(user=user.userName)
     except(invites.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     response = []
