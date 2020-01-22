@@ -22,9 +22,10 @@ def getUser(request):
         mydb = myclient["casadario"]
         mycol = mydb["idcounter_idcollection"]
         collection = mycol.find_one()
+        test = collection.collection_id
     except (IdCollection.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    return JsonResponse({'response': dumps(collection)})
+    return JsonResponse({'response': test})
 
 
 def incrementUser(request):
