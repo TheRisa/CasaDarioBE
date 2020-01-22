@@ -32,36 +32,34 @@ def getUser(request):
 
 def incrementUser(request):
     # Metodo mysql
-    try:
-        collection = IdCollection.objects.get(id=1)
-        collection.id_user = collection.id_user + 1
-        collection.save()
-    except (IdCollection.DoesNotExist, DatabaseError):
-        return JsonResponse({'response': False})
-    return JsonResponse({'response': collection.id_user})
-
-    # Metodo mongodb
     # try:
     #     collection = IdCollection.objects.get(id=1)
-    #     myclient = MongoClient(
-    #         "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
-    #     mydb = myclient["casadario"]
-    #     mycol = mydb["idcounter_idcollection"]
-    #     newCount = collection.id_user + 1
-    #     mycol.update_one(
-    #         collection, {"id": 1, "id_user": newCount, "id_event": collection.id_event,
-    #                      "id_invite": collection.id_invite})
-    # except BulkWriteError as bwe:
-    #     return JsonResponse({'response': bwe.details["nInserted"] > 0})
-    # return JsonResponse({'response': True})
+    #     collection.id_user = collection.id_user + 1
+    #     collection.save()
+    # except (IdCollection.DoesNotExist, DatabaseError):
+    #     return JsonResponse({'response': False})
+    # return JsonResponse({'response': collection.id_user})
+
+    # Metodo mongodb
+    try:
+        mycol = conncet()
+        collection = mycol.find_one()
+        newCount = collection['id_user'] + 1
+        mycol.update_one(
+            collection, {"id": 1, "id_user": newCount, "id_event": collection.id_event,
+                         "id_invite": collection.id_invite})
+    except BulkWriteError as bwe:
+        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    return JsonResponse({'response': True})
 
 
 def getEvent(request):
     try:
-        collection = IdCollection.objects.get(id=1)
+        mycol = conncet()
+        collection = mycol.find_one()
     except (IdCollection.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    return JsonResponse({'response': collection.id_event})
+    return JsonResponse({'response': collection['id_event']})
 
 
 def incrementEvent(request):
@@ -92,10 +90,11 @@ def incrementEvent(request):
 
 def getInvite(request):
     try:
-        collection = IdCollection.objects.get(id=1)
+        mycol = conncet()
+        collection = mycol.find_one()
     except (IdCollection.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    return JsonResponse({'response': collection.id_invite})
+    return JsonResponse({'response': collection.['id_invite']})
 
 
 def incrementInvite(request):
