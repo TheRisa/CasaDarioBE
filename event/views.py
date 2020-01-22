@@ -45,7 +45,7 @@ def getAllEvents(request, userNameInput):
             'date': event.date,
             'initHour': event.initHour,
             'type': event.type,
-            'creator': event.creator.userName,
+            'creator': event.creator,
             'isConfirmed': isConfirmed
         }
         response.append(tmpEvent)
