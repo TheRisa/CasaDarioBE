@@ -157,7 +157,7 @@ def updateLastLogin(request, userName):
     try:
         db = conncet()
         userCol = db["user_user"]
-        mycol.update_one(
+        userCol.update_one(
             {"userName": userName}, {"$set": {"lastDate": datetime.now()}})
     except BulkWriteError as bwe:
         return JsonResponse({'response': bwe.details["nInserted"] > 0})
