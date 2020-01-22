@@ -4,10 +4,8 @@ from user import models as user_models
 
 
 class Invite(models.Model):
-    event = models.ForeignKey(
-        event_models.Event, on_delete=models.CASCADE, verbose_name='event')
-    user = models.ForeignKey(
-        user_models.User, on_delete=models.CASCADE, verbose_name='user')
+    event = models.IntegerField("Id evento", default=0)
+    user = models.IntegerField("Id utente", default=0)
     isConfirmed = models.BooleanField(default=False)
 
     def __str__(self):
