@@ -21,7 +21,7 @@ from pymongo import MongoClient
 def api(request):
     return HttpResponse("Benvenuto nel back office di CasaDario, sezione Event api.")
 
-def conncet():
+def connect():
     myclient = MongoClient(
             "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
     mydb = myclient["casadario"]
