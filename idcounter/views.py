@@ -13,7 +13,7 @@ from .models import IdCollection
 
 def getUser(request):
     try:
-        collection = IdCollection.objects.get(id=1)
+        collection = IdCollection.objects.get(collection_id=1)
     except (IdCollection.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     return JsonResponse({'response': collection.id_user})
