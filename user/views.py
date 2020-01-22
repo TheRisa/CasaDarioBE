@@ -136,11 +136,11 @@ def createUser(request, userName, psw, firstName, lastName):
             {"firstName": firstName, "lastName": lastName,
                 "userName": userName, "password": psw, "description": "", "gayPoint": 0,
                 "totalPoint": 0, "monthPoint": 0, "profileImg": "https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png",
-                "id": 12}
+                "lastDate": "2020-01-10T23:00:00.000+00:00", "id": 12}
         ]
         userCol.insert_many(newUser)
     except BulkWriteError as bwe:
-        return JsonResponse({"response": bwe.details["nInserted"] > 0})
+        return JsonResponse({"response": bwe.details["nInserted"] > 0, "test": idCol["id_user"]})
     return JsonResponse({"response": True})
 
 
