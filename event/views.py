@@ -39,7 +39,7 @@ def getAllEvents(request, userNameInput):
     response = []
     # test = invites.event
     for invite in invites:
-        event = Event.objects.get(id=invite.event)
+        event = Event.objects.get(id=invite['event'])
         response.append(event.name)
         # tmpEvent = {
         #     'id': event.id,
