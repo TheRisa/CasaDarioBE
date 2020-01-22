@@ -170,7 +170,7 @@ def updateTotalPoint(request, userName):
         user = User.objects.get(userName=userName)
         userCol = db["user_user"]
         userCol.update_one(
-            {"userName": userName}, {"$set": {"totalPoint": user.totalPoint + 1}})
+            {"userName": userName}, {"$set": {"totalPoint": user.totalPoint + 1, "monthPoint": user.monthPoint + 1}})
     except BulkWriteError as bwe:
         return JsonResponse({'response': bwe.details["nInserted"] > 0})
     return JsonResponse({'response': True})
