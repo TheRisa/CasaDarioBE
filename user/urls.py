@@ -13,6 +13,8 @@ urlpatterns = [
          views.updateLastLogin, name='updateLastLogin'),
     path('updateTotalPoint/<userName>',
          views.updateTotalPoint, name='updateTotalPoint'),
+    path('resetMonthPointt/<userName>',
+         views.restMonthPoint, name='resetMonthPoint'),
     path('createuser/<userName>/<psw>/<firstName>/<lastName>/',
          views.createUser, name='createUser')
 ]
