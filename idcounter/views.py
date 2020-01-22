@@ -13,19 +13,21 @@ from bson.json_util import dumps
 
 from .models import IdCollection
 
-
-def getUser(request):
-    try:
-        # collection = IdCollection.objects.get(collection_id=1)
-        myclient = MongoClient(
+def conncet():
+    myclient = MongoClient(
             "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
         mydb = myclient["casadario"]
         mycol = mydb["idcounter_idcollection"]
+        return mycol
+
+
+def getUser(request):
+    try:
+        mycol = conncet()
         collection = mycol.find_one()
-        test = collection['collection_id']
     except (IdCollection.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    return JsonResponse({'response': test})
+    return JsonResponse({'response': collection['id_user']})
 
 
 def incrementUser(request):
