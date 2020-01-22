@@ -136,7 +136,7 @@ def createUser(request, userName, psw, firstName, lastName):
             {"firstName": firstName, "lastName": lastName,
                 "userName": userName, "password": psw, "description": "", "gayPoint": 0,
                 "totalPoint": 0, "monthPoint": 0, "profileImg": "https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png",
-                "id": 200}
+                "lastDate": "", "id": idCol["id_user"]}
         ]
         userCol.insert_many(newUser)
     except BulkWriteError as bwe:
