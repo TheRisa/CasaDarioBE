@@ -131,16 +131,17 @@ def createUser(request, userName, psw, firstName, lastName):
     try:
         db = conncet()
         idCol = db["idcounter_idcollection"]
-        userCol = db["user_user"]
+        collection = idCol.find_one()
+        userCol = db["user_user"]   
         newUser = [
             {"firstName": firstName, "lastName": lastName,
                 "userName": userName, "password": psw, "description": "", "gayPoint": 0,
                 "totalPoint": 0, "monthPoint": 0, "profileImg": "https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png",
-                "lastDate": "2020-01-10T23:00:00.000+00:00", "id": 12}
+                "lastDate": "2020-01-10T23:00:00.000+00:00", "id": collection["id_user"]}
         ]
         userCol.insert_many(newUser)
     except BulkWriteError as bwe:
-        return JsonResponse({"response": bwe.details["nInserted"] > 0, "test": idCol["id_user"]})
+        return JsonResponse({"response": bwe.details["nInserted"] > 0})
     return JsonResponse({"response": True})
 
 
