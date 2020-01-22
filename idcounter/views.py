@@ -13,10 +13,15 @@ from .models import IdCollection
 
 def getUser(request):
     try:
-        collection = IdCollection.objects.get(collection_id=1)
+        # collection = IdCollection.objects.get(collection_id=1)
+        myclient = MongoClient(
+            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
+        mydb = myclient["casadario"]
+        mycol = mydb["idcounter_idcollection"]
+        collection = mycol.find({})
     except (IdCollection.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    return JsonResponse({'response': collection.id_user})
+    return JsonResponse({'response': collection})
 
 
 def incrementUser(request):
