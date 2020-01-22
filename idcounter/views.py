@@ -24,7 +24,7 @@ def getUser(request):
             response.append(item)
     except (IdCollection.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    return JsonResponse({'response': collection})
+    return JsonResponse({'response': response})
 
 
 def incrementUser(request):
