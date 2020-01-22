@@ -31,11 +31,11 @@ def conncet():
 def getAllEvents(request, userNameInput):
     try:
         user = User.objects.get(userName=userNameInput)
-        invites = Invite.objects.filter(user=user.id)
+        invites = Invite.objects.get(user=1)
     except(Invite.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     response = []
-    test = 0
+    test = invites.event
     for invite in invites:
         event = Event.objects.get(id=invite.event)
         test = event.id
@@ -77,10 +77,8 @@ def createEvent(request):
     # Metodo per mongodb
 
     try:
-        myclient = MongoClient(
-            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
-        mydb = myclient["casadario"]
-        mycol = mydb["askme_todo"]
+        mydb = connect()
+        mycol = mydb["event_event"]
         # TODO: da finire
         mylist = [
             {"name": request.data['name'], "description": request.data['description'],
