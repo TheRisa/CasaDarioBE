@@ -21,13 +21,18 @@ from pymongo import MongoClient
 def api(request):
     return HttpResponse("Benvenuto nel back office di CasaDario, sezione Event api.")
 
+def conncet():
+    myclient = MongoClient(
+            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
+    mydb = myclient["casadario"]
+    return mydb
+
 
 def getAllEvents(request, userNameInput):
     try:
-        response = []
         user = User.objects.get(userName=userNameInput)
         invites = Invite.objects.filter(user=user.userName)
-    except(invites.DoesNotExist, User.DoesNotExist, DatabaseError):
+    except(Invite.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     response = []
     for invite in invites:
