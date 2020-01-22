@@ -166,13 +166,14 @@ def updateLastLogin(request, userName):
 
 def updateTotalPoint(request, userName):
     try:
+        db = conncet()
         user = User.objects.get(userName=userName)
-        user.totalPoint = user.totalPoint + 1
-        user.monthPoint = user.monthPoint + 1
-        user.save()
-    except (User.DoesNotExist, DatabaseError):
-        return JsonResponse({"response": False})
-    return JsonResponse({"response": user.totalPoint})
+        userCol = db["user_user"]
+        userCol.update_one(
+            {"userName": userName}, {"$set": {"totalPoint": user.totalPoint + 1}})
+    except BulkWriteError as bwe:
+        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    return JsonResponse({'response': True})
 
 
 def getProfileImg(request, userName):
