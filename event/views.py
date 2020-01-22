@@ -41,21 +41,19 @@ def getAllEvents(request, userNameInput):
     # test = invites.event
     for invite in invites:
         event = eventCol.find_one({'id': invite['event']})
-        response.append(event['name'])
-        # tmpEvent = {
-        #     'id': event.id,
-        #     'name': event.name,
-        #     'description': event.description,
-        #     'place': event.place,
-        #     'date': event.date,
-        #     'initHour': event.initHour,
-        #     'type': event.type,
-        #     'creator': event.creator,
-        #     'isConfirmed': isConfirmed
-        # }
-        # response.append(tmpEvent)
-    # return JsonResponse({'response': response, 'user': user.id, 'prova': invites.event})
-    return JsonResponse({'prova': response})
+        tmpEvent = {
+            'id': event['id'],
+            'name': event['name'],
+            'description': event['description'],
+            'place': event['place'],
+            'date': event{'date'},
+            'initHour': event['initHour'],
+            'type': event['type'],
+            'creator': event['creator'],
+            'isConfirmed': invite['isConfirmed']
+        }
+        response.append(tmpEvent)
+    return JsonResponse({'response': response})
 
 
 @api_view(['POST'])
