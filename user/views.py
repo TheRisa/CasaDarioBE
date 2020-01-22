@@ -24,6 +24,12 @@ Home di api user, non fa nulla tranne render
 def api(request):
     return HttpResponse("Benvenuto nel back office di CasaDario, sezione User api.")
 
+def conncet():
+    myclient = MongoClient(
+            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
+    mydb = myclient["casadario"]
+    return mydb
+
 
 """
 /api/user/login/username/password
@@ -123,19 +129,17 @@ def createUser(request, userName, psw, firstName, lastName):
 
     # Metodo mongodb
     try:
-        collection = IdCollection.objects.get(id=1)
-        myclient = MongoClient(
-            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
-        mydb = myclient["casadario"]
-        mycol = mydb["user_user"]
-        mylist = [
+        db = conncet()
+        idCol = db["idcounter_idcollection"]
+        userCol = db["user_user"]
+        newUser = [
             {"firstName": firstName, "lastName": lastName,
                 "userName": userName, "password": psw, "description": '', "gayPoint": 0,
-                "totalPoint": 0, "monthPoint": 0, "profileImg": 'https: // polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png',
-                "lastDate": '2020-01-10T23:00:00.000+00:00', "id": collection.id_user}
+                "totalPoint": 0, "monthPoint": 0, "profileImg": 'https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png',
+                "lastDate": '2020-01-10T23:00:00.000+00:00', "id": idCol["id_user"]}
 
         ]
-        mycol.insert_many(mylist)
+        userCol.insert_many(newUser)
     except BulkWriteError as bwe:
         return JsonResponse({'response': bwe.details["nInserted"] > 0})
     return JsonResponse({'response': True})
