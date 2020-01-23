@@ -79,11 +79,13 @@ def createEvent(request):
     try:
         mydb = connect()
         mycol = mydb["event_event"]
+        idCol = mydb["idcounter_idcollection"]
+        collection = idCol.find_one()
         mylist = [
             {"name": request.data['name'], "description": request.data['description'],
                 "place": request.data['place'], "date": request.data['date'],
                 "initHour": request.data['initHour'], "type": request.data['type'],
-                "creator": request.data['creator']}
+                "creator": request.data['creator'], "id": collection['id_event']}
 
         ]
         mycol.insert_many(mylist)
