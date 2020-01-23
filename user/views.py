@@ -26,7 +26,7 @@ def api(request):
 
 def conncet():
     myclient = MongoClient(
-            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
+            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majority")
     mydb = myclient["casadario"]
     return mydb
 
@@ -170,7 +170,8 @@ def updateTotalPoint(request, userName):
         user = User.objects.get(userName=userName)
         userCol = db["user_user"]
         userCol.update_one(
-            {"userName": userName}, {"$set": {"totalPoint": user.totalPoint + 1, "monthPoint": user.monthPoint + 1}})
+            {"userName": userName},
+            {"$set": {"totalPoint": user.totalPoint + 1, "monthPoint": user.monthPoint + 1}})
     except BulkWriteError as bwe:
         return JsonResponse({'response': bwe.details["nInserted"] > 0})
     return JsonResponse({'response': True})
