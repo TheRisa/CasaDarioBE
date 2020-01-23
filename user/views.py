@@ -174,14 +174,14 @@ def updateTotalPoint(request, userName):
             {"userName": userName},
             {"$set": {"totalPoint": user.totalPoint + 1, "monthPoint": user.monthPoint + 1}})
         incrementUser(request)
+        user = userCol.find_one({"userName": userName})
     except BulkWriteError:
         return JsonResponse({'response': False})
-    return JsonResponse({'response': userCol['totalPoint']})
+    return JsonResponse({'response': user['totalPoint']})
 
 def restMonthPoint(request, userName):
     try:
         db = conncet()
-        user = User.objects.get(userName=userName)
         userCol = db["user_user"]
         userCol.update_one(
             {"userName": userName}, {"$set": {"monthPoint": 0}})
