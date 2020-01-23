@@ -83,7 +83,7 @@ def createEvent(request):
             {"name": request.data['name'], "description": request.data['description'],
                 "place": request.data['place'], "date": request.data['date'],
                 "initHour": request.data['initHour'], "type": request.data['type'],
-                "creator": request.data['name']}
+                "creator": request.data['creator']}
 
         ]
         mycol.insert_many(mylist)
