@@ -23,7 +23,7 @@ def api(request):
 
 def connect():
     myclient = MongoClient(
-            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
+            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majority")
     mydb = myclient["casadario"]
     return mydb
 
@@ -87,8 +87,8 @@ def createEvent(request):
 
         ]
         mycol.insert_many(mylist)
-    except BulkWriteError as bwe:
-        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
     return JsonResponse({'response': True})
 
 
@@ -125,6 +125,6 @@ def updateEvent(request, eventId):
             'type': request.data['type'],
             'creator': request.data['creator']
         }})
-    except BulkWriteError as bwe:
-        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
     return JsonResponse({'response': True})

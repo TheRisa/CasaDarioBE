@@ -140,8 +140,8 @@ def createUser(request, userName, psw, firstName, lastName):
                 "lastDate": "2020-01-10T23:00:00.000+00:00", "id": collection["id_user"]}
         ]
         userCol.insert_many(newUser)
-    except BulkWriteError as bwe:
-        return JsonResponse({"response": bwe.details["nInserted"] > 0})
+    except BulkWriteError:
+        return JsonResponse({"response": False})
     return JsonResponse({"response": True})
 
 
@@ -160,7 +160,7 @@ def updateLastLogin(request, userName):
         userCol.update_one(
             {"userName": userName}, {"$set": {"lastDate": datetime.datetime.now().isoformat()}})
     except Exception as e:
-        return JsonResponse({'response': e})
+        return JsonResponse({'response': False})
     return JsonResponse({'response': True})
 
 
@@ -172,9 +172,9 @@ def updateTotalPoint(request, userName):
         userCol.update_one(
             {"userName": userName},
             {"$set": {"totalPoint": user.totalPoint + 1, "monthPoint": user.monthPoint + 1}})
-    except BulkWriteError as bwe:
-        return JsonResponse({'response': bwe.details["nInserted"] > 0})
-    return JsonResponse({'response': True})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': userCol['totalPoint']})
 
 def restMonthPoint(request, userName):
     try:
@@ -183,8 +183,8 @@ def restMonthPoint(request, userName):
         userCol = db["user_user"]
         userCol.update_one(
             {"userName": userName}, {"$set": {"monthPoint": 0}})
-    except BulkWriteError as bwe:
-        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
     return JsonResponse({'response': True})
 
 

@@ -15,7 +15,7 @@ from .models import IdCollection
 
 def conncet():
     myclient = MongoClient(
-            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
+            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majority")
     mydb = myclient["casadario"]
     mycol = mydb["idcounter_idcollection"]
     return mycol
@@ -46,8 +46,8 @@ def incrementUser(request):
         collection = mycol.find_one()
         mycol.update_one(
             {"collection_id": 1}, {"$set": {"id_user": collection["id_user"] + 1}})
-    except BulkWriteError as bwe:
-        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
     return JsonResponse({'response': True})
 
 
@@ -76,8 +76,8 @@ def incrementEvent(request):
         collection = mycol.find_one()
         mycol.update_one(
             {"collection_id": 1}, {"$set": {"id_event": collection["id_event"] + 1}})
-    except BulkWriteError as bwe:
-        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
     return JsonResponse({'response': True})
 
 
@@ -106,6 +106,6 @@ def incrementInvite(request):
         collection = mycol.find_one()
         mycol.update_one(
             {"collection_id": 1}, {"$set": {"id_invite": collection["id_invite"] + 1}})
-    except BulkWriteError as bwe:
-        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
     return JsonResponse({'response': True})

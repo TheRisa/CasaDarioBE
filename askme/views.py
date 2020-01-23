@@ -38,13 +38,13 @@ def addTodo(request, title, body):
     # Metodo per mongodb
     try:
         myclient = MongoClient(
-            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majoritys")
+            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majority")
         mydb = myclient["casadario"]
         mycol = mydb["askme_todo"]
         mylist = [
             {"title": title, "todo": body}
         ]
         mycol.insert_many(mylist)
-    except BulkWriteError as bwe:
-        return JsonResponse({'response': bwe.details["nInserted"] > 0})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
     return JsonResponse({'response': True})
