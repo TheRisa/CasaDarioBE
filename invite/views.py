@@ -10,21 +10,41 @@ from .models import Invite
 from event.models import Event
 from user.models import User
 
+from pymongo.errors import BulkWriteError
+from pymongo import MongoClient
+
 
 def api(request):
     return HttpResponse("Benvenuto nel back office di CasaDario, sezione Invite api.")
 
+def connect():
+    myclient = MongoClient(
+            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majority")
+    mydb = myclient["casadario"]
+    return mydb
+
 
 def addInvite(request, userId, eventId):
     # TODO:
+    # Metodo mysql
+    # try:
+    #     event = Event.objects.get(id=eventId)
+    #     user = User.objects.get(id=userId)
+    #     invite = Invite()
+    #     invite.event = event
+    #     invite.user = user
+    #     invite.save()
+    # except (Invite.DoesNotExist, User.DoesNotExist, Event.DoesNotExist, DatabaseError):
+    #     return JsonResponse({'response': False})
+    # return JsonResponse({'response': True})
+
+    # Metodo mongodb
     try:
-        event = Event.objects.get(id=eventId)
-        user = User.objects.get(id=userId)
-        invite = Invite()
-        invite.event = event
-        invite.user = user
-        invite.save()
-    except (Invite.DoesNotExist, User.DoesNotExist, Event.DoesNotExist, DatabaseError):
+        db = connect()
+        inviteCol = db['invite_invite']
+        list = [{"event": eventId, "user": userId, "isConfirmed": False}]
+        inviteCol.insert_many(list)
+    except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
 

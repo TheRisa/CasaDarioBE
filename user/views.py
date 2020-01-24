@@ -70,7 +70,8 @@ def getUser(request, userName):
         "lastName": user.lastName,
         "totalPoint": user.totalPoint,
         "monthPoint": user.monthPoint,
-        "gayPoint": user.gayPoint
+        "gayPoint": user.gayPoint,
+        "profileImg": user.profileImg
     }})
 
 
@@ -141,6 +142,7 @@ def createUser(request, userName, psw, firstName, lastName):
                 "lastDate": "2020-01-10T23:00:00.000+00:00", "id": collection["id_user"]}
         ]
         userCol.insert_many(newUser)
+        incrementUser(request)
     except BulkWriteError:
         return JsonResponse({"response": False})
     return JsonResponse({"response": True})
@@ -173,7 +175,6 @@ def updateTotalPoint(request, userName):
         userCol.update_one(
             {"userName": userName},
             {"$set": {"totalPoint": user.totalPoint + 1, "monthPoint": user.monthPoint + 1}})
-        incrementUser(request)
         user = userCol.find_one({"userName": userName})
     except BulkWriteError:
         return JsonResponse({'response': False})

@@ -13,6 +13,7 @@ from invite.models import Invite
 from .models import Event
 from idcounter.models import IdCollection
 from user.models import User
+from idcounter.views import incrementEvent
 
 from pymongo.errors import BulkWriteError
 from pymongo import MongoClient
@@ -89,6 +90,7 @@ def createEvent(request):
 
         ]
         mycol.insert_many(mylist)
+        incrementEvent(request)
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
