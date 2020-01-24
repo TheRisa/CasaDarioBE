@@ -12,12 +12,18 @@ Home di api did you know
 return json con testo di una curiosità a caso
 """
 
+def connect():
+    myclient = MongoClient(
+            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majority")
+    mydb = myclient["casadario"]
+    myCol = mydb["didyouknow_curiosity"]
+    return myCol
+
 
 def api(request):
     try:
-        curiosity = Curiosity.objects.all()
+        curiosityCol = connect()
+        curiosity = curiosityCol.aggregate([{ "$sample": { "size": 1 } }])
     except DatabaseError:
         return JsonResponse({'response': False})
-    response = {'response': curiosity[random.randint(
-        0, curiosity.count() - 1)].curiosityText}
-    return JsonResponse(response)
+    return JsonResponse({"response": curiosity['curiosityText']})
