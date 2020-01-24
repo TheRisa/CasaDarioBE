@@ -110,11 +110,11 @@ def getAllUsers(request):
         userCol = db['user_user']
         # users = userCol.find({}).sort({"totalPoint": -1})
         users = userCol.find()
-        orderedUser = users.sort({"totalPresence": -1})
+        orderedUsers = users.sort({"totalPresence": -1})
     except DatabaseError:
         return JsonResponse({"response": False})
     response = []
-    for user in users:
+    for user in orderedUsers:
         tmpUser = {
             "userName": user['userName'],
             "firstName": user['firstName'],
