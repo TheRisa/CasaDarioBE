@@ -70,7 +70,7 @@ def getInvitedUser(request, eventId):
         userCol = db['user_user']
         for invite in invites:
             user = userCol.find_one({"id": invite['user']})
-            response.append(invite['user'])
+            response.append(user['userName'])
     except (Event.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     return JsonResponse({'response': response})
@@ -97,9 +97,9 @@ def getInvitedAndConfirmedUser(request, eventId):
         invites = inviteCol.find({"event": int(eventId)})
         userCol = db['user_user']
         for invite in invites:
-            if (invite['isConfirmed']):
+            if (invite['isConfirmed'] and invite['isConfirmed'] != 'False'):
                 user = userCol.find_one({"id": invite['user']})
-                response.append(invite['user'])
+                response.append(user['userName'])
     except (Event.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     return JsonResponse({'response': response})
