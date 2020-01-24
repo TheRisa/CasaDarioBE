@@ -1,8 +1,11 @@
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.db import DatabaseError
 
 import random
 import json
+
+from pymongo import MongoClient
 
 from .models import Curiosity
 
