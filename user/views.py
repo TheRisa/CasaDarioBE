@@ -106,7 +106,7 @@ def getAllUsers(request):
 
     # Metodo mongodb
     try:
-        db = conncet
+        db = conncet()
         userCol = db['user_user']
         users = userCol.find().sort({"totalPoint": -1, "monthPoint": -1, "gayPoint": -1})
     except DatabaseError:
@@ -158,7 +158,7 @@ def createUser(request, userName, psw, firstName, lastName):
         db = conncet()
         idCol = db["idcounter_idcollection"]
         collection = idCol.find_one()
-        userCol = db["user_user"]   
+        userCol = db["user_user"]
         newUser = [
             {"firstName": firstName, "lastName": lastName,
                 "userName": userName, "password": psw, "description": "", "gayPoint": 0,
