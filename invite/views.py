@@ -67,7 +67,7 @@ def getInvitedUser(request, eventId):
         db = connect()
         inviteCol = db['invite_invite']
         # invites = inviteCol.find({"event": eventId})
-        invites = inviteCol.find_one()
+        invites = inviteCol.find_one({"event": eventId})
         # userCol = db['user_user']
         # for invite in invites:
         #     response.append(invite['user'])
