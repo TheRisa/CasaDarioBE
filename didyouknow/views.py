@@ -26,10 +26,10 @@ def connect():
 def api(request):
     try:
         curiosityCol = connect()
-        curiositys = curiosityCol.aggregate([{ "$sample": { "size": 2 } }])
+        curiositys = curiosityCol.aggregate([{ "$sample": { "size": 1 } }])
         response = []
         for curiostity in curiositys:
             response.append(curiostity['curiostityText'])
     except DatabaseError:
         return JsonResponse({'response': False})
-    return JsonResponse({"response": response})
+    return JsonResponse({"response": response[0]})
