@@ -83,25 +83,49 @@ return json di tutti i dati degli utenti
 
 
 def getAllUsers(request):
+    # Metodo mysql
+    # try:
+    #     users = User.objects.all()
+    # except (User.DoesNotExist, DatabaseError):
+    #     return JsonResponse({"response": False})
+    # returnValue = []
+    # for user in users:
+    #     tmpuser = {
+    #         "userName": user.userName,
+    #         "firstName": user.firstName,
+    #         "lastName": user.lastName,
+    #         "totalPoint": user.totalPoint,
+    #         "monthPoint": user.monthPoint,
+    #         "description": user.description,
+    #         "id": user.id,
+    #         "gayPoint": user.gayPoint,
+    #         "profileImg": user.profileImg
+    #     }
+    #     returnValue.append(tmpuser)
+    # return JsonResponse({"response": returnValue})
+
+    # Metodo mongodb
     try:
-        users = User.objects.all()
-    except (User.DoesNotExist, DatabaseError):
+        db = conncet
+        userCol = db['user_user']
+        users = userCol.find().sort({"totalPoint": -1, "monthPoint": -1, "gayPoint": -1})
+    except DatabaseError:
         return JsonResponse({"response": False})
-    returnValue = []
+    response = []
     for user in users:
-        tmpuser = {
-            "userName": user.userName,
-            "firstName": user.firstName,
-            "lastName": user.lastName,
-            "totalPoint": user.totalPoint,
-            "monthPoint": user.monthPoint,
-            "description": user.description,
-            "id": user.id,
-            "gayPoint": user.gayPoint,
-            "profileImg": user.profileImg
+        tmpUser = {
+            "userName": user['userName'],
+            "firstName": user['firstName'],
+            "lastName": user['lastName'],
+            "totalPOint": user['totalPoint'],
+            "monthPoint": user['monthPoint'],
+            "description": user['description'],
+            "id": user['id'],
+            "gayPoint": user['gayPoint'],
+            "profileImg": user['profileImg']
         }
-        returnValue.append(tmpuser)
-    return JsonResponse({"response": returnValue})
+        response.append(tmpUser)
+    return JsonResponse({"response": response})
 
 
 """
