@@ -97,7 +97,7 @@ def getInvitedAndConfirmedUser(request, eventId):
         invites = inviteCol.find({"event": int(eventId)})
         userCol = db['user_user']
         for invite in invites:
-            if (invite['isConfirmed'])
+            if (invite['isConfirmed']):
                 user = userCol.find_one({"id": invite['user']})
                 response.append(invite['user'])
     except (Event.DoesNotExist, DatabaseError):
