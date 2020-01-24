@@ -127,14 +127,26 @@ def deleteOldInvites(request, eventId):
 
 
 def setIsConfirmed(request, confirmation, eventId, userName):
-    # TODO: Controlla
+    # Metodo mysql
+    # try:
+    #     event = Event.objects.get(id=eventId)
+    #     user = User.objects.get(userName=userName)
+    #     invites = Invite.objects.filter(event=event, user=user)
+    # except (Event.DoesNotExist, User.DoesNotExist, DatabaseError):
+    #     return JsonResponse({'response': False})
+    # for invite in invites:
+    #     invite.isConfirmed = confirmation
+    #     invite.save()
+    # return JsonResponse({'response': True})
+
+    # Metodo mongodb
     try:
-        event = Event.objects.get(id=eventId)
-        user = User.objects.get(userName=userName)
-        invites = Invite.objects.filter(event=event, user=user)
-    except (Event.DoesNotExist, User.DoesNotExist, DatabaseError):
+        db = connect()
+        inviteCol = db['invite_invite']
+        userCol = db['user_user']
+        user = userCol.find_one({"userName": userName})
+        inviteCol.update_one({"event": int(eventId), "user": user['id']},
+            {"$set": {"isInvited": confirmation}})
+    except BulkWriteError:
         return JsonResponse({'response': False})
-    for invite in invites:
-        invite.isConfirmed = confirmation
-        invite.save()
     return JsonResponse({'response': True})
