@@ -50,16 +50,31 @@ def addInvite(request, userId, eventId):
 
 
 def getInvitedUser(request, eventId):
-    # TODO: controlla funzionamento
+    # Metodo mysql
+    # try:
+    #     event = Event.objects.get(id=eventId)
+    #     invites = Invite.objects.filter(event=event)
+    # except (Event.DoesNotExist, DatabaseError):
+    #     return JsonResponse({'response': False})
+    # response = []
+    # for invite in invites:
+    #     response.append(invite.user.userName)
+    # return JsonResponse({'response': response})
+
+    # Metodo mongodb
+    response = []
     try:
-        event = Event.objects.get(id=eventId)
-        invites = Invite.objects.filter(event=event)
+        db = connect()
+        inviteCol = db['invite_invite']
+        invites = find{"event": eventId}
+        userCol = db['user_user']
+        for invite in invites:
+            user = userCol.find_one({"id": invite['user']})
+            response.append(user['userName'])
     except (Event.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    response = []
-    for invite in invites:
-        response.append(invite.user.userName)
     return JsonResponse({'response': response})
+
 
 
 def getInvitedAndConfirmedUser(request, eventId):
