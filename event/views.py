@@ -93,7 +93,7 @@ def createEvent(request):
         incrementEvent(request)
     except BulkWriteError:
         return JsonResponse({'response': False})
-    return JsonResponse({'response': True})
+    return JsonResponse({'response': mylist[0]['id']})
 
 
 @api_view(['POST'])

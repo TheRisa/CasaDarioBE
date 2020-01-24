@@ -25,7 +25,6 @@ def connect():
 
 
 def addInvite(request, userId, eventId):
-    # TODO:
     # Metodo mysql
     # try:
     #     event = Event.objects.get(id=eventId)
