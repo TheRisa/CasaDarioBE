@@ -106,14 +106,23 @@ def getInvitedAndConfirmedUser(request, eventId):
 
 
 def deleteOldInvites(request, eventId):
-    # TODO:
+    # Metodo mysql
+    # try:
+    #     event = Event.objects.get(id=eventId)
+    #     invites = Invite.objects.filter(event=event)
+    # except (Event.DoesNotExist, DatabaseError):
+    #     return JsonResponse({'response': False})
+    # for invite in invites:
+    #     invite.delete()
+    # return JsonResponse({'response': True})
+
+    # Metodo mongodb
     try:
-        event = Event.objects.get(id=eventId)
-        invites = Invite.objects.filter(event=event)
-    except (Event.DoesNotExist, DatabaseError):
+        db = connect()
+        inviteCol = db['invite_invite']
+        inviteCol.delete_many({"event": int(eventId)})
+    except BulkWriteError:
         return JsonResponse({'response': False})
-    for invite in invites:
-        invite.delete()
     return JsonResponse({'response': True})
 
 
