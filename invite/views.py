@@ -146,7 +146,7 @@ def setIsConfirmed(request, confirmation, eventId, userName):
         userCol = db['user_user']
         user = userCol.find_one({"userName": userName})
         inviteCol.update_one({"event": int(eventId), "user": user['id']},
-            {"$set": {"isInvited": confirmation}})
+            {"$set": {"isConfirmed": confirmation}})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
