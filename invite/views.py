@@ -41,7 +41,7 @@ def addInvite(request, userId, eventId):
     try:
         db = connect()
         inviteCol = db['invite_invite']
-        list = [{"event": eventId, "user": userId, "isConfirmed": False}]
+        list = [{"event": int(eventId), "user": int(userId), "isConfirmed": False}]
         inviteCol.insert_many(list)
     except BulkWriteError:
         return JsonResponse({'response': False})
@@ -68,7 +68,8 @@ def getInvitedUser(request, eventId):
         invites = inviteCol.find({"event": int(eventId)})
         userCol = db['user_user']
         for invite in invites:
-            user = userCol.find_one({"id": int(invite['user'])})
+            userId = invite['user']
+            user = userCol.find_one({"id": int(userId)})
             response.append(user['userName'])
     except (Event.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
