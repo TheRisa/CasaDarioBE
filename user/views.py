@@ -109,7 +109,8 @@ def getAllUsers(request):
         db = conncet()
         userCol = db['user_user']
         # users = userCol.find({}).sort({"totalPoint": -1})
-        users = userCol.find({}, {"$sort": {"totalPresence": -1}})
+        users = userCol.find()
+        orderedUser = users.sort({"totalPresence": -1})
     except DatabaseError:
         return JsonResponse({"response": False})
     response = []
