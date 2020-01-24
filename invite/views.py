@@ -62,19 +62,18 @@ def getInvitedUser(request, eventId):
     # return JsonResponse({'response': response})
 
     # Metodo mongodb
-    # response = []
+    response = []
     try:
         db = connect()
         inviteCol = db['invite_invite']
-        # invites = inviteCol.find({"event": eventId})
-        invites = inviteCol.find_one({"event": int(eventId)})
-        # userCol = db['user_user']
-        # for invite in invites:
-        #     response.append(invite['user'])
+        invites = inviteCol.find({"event": int(eventId)})
+        userCol = db['user_user']
+        for invite in invites:
+            user = userCol.find_one({"id": invite['user']})
+            response.append(invite['user'])
     except (Event.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
-    # return JsonResponse({'response': response})
-    return JsonResponse({'response': invites['user'], "id": int(eventId)})
+    return JsonResponse({'response': response})
 
 
 
