@@ -59,7 +59,6 @@ def getAllUserEvents(request, userNameInput):
 def getAllEvents(request):
     try:
         db = connect()
-        eventsCol = db['invite_invite']
         eventCol = db['event_event']
         events = eventCol.find()
     except(User.DoesNotExist, DatabaseError):
@@ -165,4 +164,4 @@ def updateEvent(request, eventId):
         }})
     except BulkWriteError:
         return JsonResponse({'response': False})
-    return JsonResponse({'response': True})
+    return JsonResponse({'response': eventId})
