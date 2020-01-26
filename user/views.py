@@ -206,12 +206,13 @@ def updateTotalPoint(request, userName):
         return JsonResponse({'response': False})
     return JsonResponse({'response': user['totalPoint']})
 
-def restMonthPoint(request, userName):
+
+def restMonthPoint(request):
     try:
         db = conncet()
         userCol = db["user_user"]
-        userCol.update_one(
-            {"userName": userName}, {"$set": {"monthPoint": 0}})
+        userCol.update_many(
+            {}, {"$set": {"monthPoint": 0}})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
