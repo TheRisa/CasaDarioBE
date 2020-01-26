@@ -29,13 +29,39 @@ def connect():
     return mydb
 
 
-def getAllEvents(request, userNameInput):
+def getAllUserEvents(request, userNameInput):
     try:
         user = User.objects.get(userName=userNameInput)
         db = connect()
         inviteCol = db['invite_invite']
         eventCol = db['event_event']
         invites = inviteCol.find({'user': user.id})
+    except(Invite.DoesNotExist, User.DoesNotExist, DatabaseError):
+        return JsonResponse({'response': False})
+    response = []
+    for invite in invites:
+        event = eventCol.find_one({'id': invite['event']})
+        tmpEvent = {
+            'id': event['id'],
+            'name': event['name'],
+            'description': event['description'],
+            'place': event['place'],
+            'date': event['date'],
+            'initHour': event['initHour'],
+            'type': event['type'],
+            'creator': event['creator'],
+            'isConfirmed': invite['isConfirmed']
+        }
+        response.append(tmpEvent)
+    return JsonResponse({'response': response})
+
+
+def getAllEvents(request):
+    try:
+        db = connect()
+        inviteCol = db['invite_invite']
+        eventCol = db['event_event']
+        invites = inviteCol.find()
     except(Invite.DoesNotExist, User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     response = []
