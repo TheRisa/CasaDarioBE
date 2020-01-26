@@ -59,14 +59,13 @@ def getAllUserEvents(request, userNameInput):
 def getAllEvents(request):
     try:
         db = connect()
-        inviteCol = db['invite_invite']
+        eventsCol = db['invite_invite']
         eventCol = db['event_event']
-        invites = inviteCol.find()
-    except(Invite.DoesNotExist, User.DoesNotExist, DatabaseError):
+        events = eventCol.find()
+    except(User.DoesNotExist, DatabaseError):
         return JsonResponse({'response': False})
     response = []
-    for invite in invites:
-        event = eventCol.find_one({'id': invite['event']})
+    for event in events:
         tmpEvent = {
             'id': event['id'],
             'name': event['name'],
@@ -75,8 +74,7 @@ def getAllEvents(request):
             'date': event['date'],
             'initHour': event['initHour'],
             'type': event['type'],
-            'creator': event['creator'],
-            'isConfirmed': invite['isConfirmed']
+            'creator': event['creator']
         }
         response.append(tmpEvent)
     return JsonResponse({'response': response})
