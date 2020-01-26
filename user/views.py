@@ -119,7 +119,7 @@ def getAllUsers(request):
             "userName": user['userName'],
             "firstName": user['firstName'],
             "lastName": user['lastName'],
-            "totalPOint": user['totalPoint'],
+            "totalPoint": user['totalPoint'],
             "monthPoint": user['monthPoint'],
             "description": user['description'],
             "id": user['id'],
