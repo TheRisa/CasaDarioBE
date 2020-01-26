@@ -84,7 +84,7 @@ def deleteOldEvent(response, eventId):
     try:
         db = connect()
         eventCol = db['event_event']
-        eventCol.delete_many({"id": eventId})
+        eventCol.delete_many({"id": int(eventId)})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
