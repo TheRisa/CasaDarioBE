@@ -20,12 +20,12 @@ from pymongo import MongoClient
 
 
 def api(request):
-    return HttpResponse("Benvenuto nel back office di CasaDario, sezione Event api.")
+    return HttpResponse('Benvenuto nel back office di CasaDario, sezione Event api.')
 
 def connect():
     myclient = MongoClient(
-            "mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majority")
-    mydb = myclient["casadario"]
+            'mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majority')
+    mydb = myclient['casadario']
     return mydb
 
 
@@ -83,7 +83,7 @@ def deleteOldEvent(response, eventId):
     try:
         db = connect()
         eventCol = db['event_event']
-        eventCol.delete_many({"id": int(eventId)})
+        eventCol.delete_many({'id': int(eventId)})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
@@ -112,14 +112,14 @@ def createEvent(request):
     # Metodo per mongodb
     try:
         mydb = connect()
-        mycol = mydb["event_event"]
-        idCol = mydb["idcounter_idcollection"]
+        mycol = mydb['event_event']
+        idCol = mydb['idcounter_idcollection']
         collection = idCol.find_one()
         mylist = [
-            {"name": request.data['name'], "description": request.data['description'],
-                "place": request.data['place'], "date": request.data['date'],
-                "initHour": request.data['initHour'], "type": request.data['type'],
-                "creator": request.data['creator'], "id": collection['id_event']}
+            {'name': request.data['name'], 'description': request.data['description'],
+                'place': request.data['place'], 'date': request.data['date'],
+                'initHour': request.data['initHour'], 'type': request.data['type'],
+                'creator': request.data['creator'], 'id': collection['id_event']}
 
         ]
         mycol.insert_many(mylist)
@@ -153,9 +153,9 @@ def updateEvent(request, eventId):
     try:
         db = connect()
         eventCol = db['event_event']
-        eventCol.update_one({'id': eventId}, {"$set": {
-            "name": request.data['name'],
-            "description": request.data['description'],
+        eventCol.update_one({'id': eventId}, {'$set': {
+            'name': request.data['name'],
+            'description': request.data['description'],
             'place': request.data['place'],
             'date': request.data['date'],
             'initHour': request.data['initHour'],
@@ -164,4 +164,4 @@ def updateEvent(request, eventId):
         }})
     except BulkWriteError:
         return JsonResponse({'response': False})
-    return JsonResponse({'response': eventId})
+    return JsonResponse({'response': eventId, 'init': request.data['initHour']})
