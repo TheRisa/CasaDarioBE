@@ -6,7 +6,7 @@ urlpatterns = [
     path('', views.api, name='api'),
     path('login/<userName>/<psw>', views.logIn, name='logIn'),
     path('getUser/<userName>/', views.getUser, name='getUser'),
-    path('getAllUsers/', views.getAllUsers, name='getAllUser'),
+    path('getAllUsers', views.getAllUsers, name='getAllUser'),
     path('getLastLogin/<userName>', views.getLastLogin, name='getLastLogin'),
     path('getProfileImg/<userName>', views.getProfileImg, name='getProfileImg'),
     path('updateLastLogin/<userName>',
