@@ -82,6 +82,16 @@ def getAllEvents(request):
     return JsonResponse({'response': response})
 
 
+def deleteOldEvent(response, eventId):
+    try:
+        db = connect()
+        eventCol = db['event_event']
+        eventCol.delete_many({"id": eventId})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': True})
+
+
 @api_view(['POST'])
 @parser_classes([JSONParser])
 def createEvent(request):
