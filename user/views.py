@@ -124,7 +124,8 @@ def getAllUsers(request):
             "description": user['description'],
             "id": user['id'],
             "gayPoint": user['gayPoint'],
-            "profileImg": user['profileImg']
+            "profileImg": user['profileImg'],
+            "password": user['password']
         }
         response.append(tmpUser)
     return JsonResponse({"response": response})
