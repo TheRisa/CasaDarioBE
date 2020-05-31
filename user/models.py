@@ -16,6 +16,9 @@ class User(models.Model):
     lastDate = models.DateTimeField(
         auto_now=False, auto_now_add=False, blank=True)
     # lastDate = models.CharField("Ultimo accesso", max_length=50, blank=True)
+    isStar = models.BooleanField(default=False)
+    starReasons = models.TextField(
+        "Ragioni punti star", blank=True)
     profileImg = models.TextField(
         "Url immagine Profilo", blank=True, default="https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png")
 

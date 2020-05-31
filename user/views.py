@@ -71,7 +71,9 @@ def getUser(request, userName):
         "totalPoint": user.totalPoint,
         "monthPoint": user.monthPoint,
         "gayPoint": user.gayPoint,
-        "profileImg": user.profileImg
+        "profileImg": user.profileImg,
+        "isStar": user.isStar,
+        "starReasons": user.starReasons
     }})
 
 
@@ -125,7 +127,9 @@ def getAllUsers(request):
             "id": user['id'],
             "gayPoint": user['gayPoint'],
             "profileImg": user['profileImg'],
-            "password": user['password']
+            "password": user['password'],
+            "isStar": user['isStar'],
+            "starReasons": user['starReasons']
         }
         response.append(tmpUser)
     return JsonResponse({"response": response})
@@ -166,7 +170,7 @@ def createUser(request, userName, psw, firstName, lastName):
             {"firstName": firstName, "lastName": lastName,
                 "userName": userName, "password": psw, "description": "", "gayPoint": 0,
                 "totalPoint": 0, "monthPoint": 0, "profileImg": "https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png",
-                "lastDate": "2020-01-10T23:00:00.000+00:00", "id": collection["id_user"]}
+                "lastDate": "2020-01-10T23:00:00.000+00:00", "id": collection["id_user"], "isStar": False, "starReasons": ""}
         ]
         userCol.insert_many(newUser)
         incrementUser(request)
