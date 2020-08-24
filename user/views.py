@@ -229,3 +229,11 @@ def getProfileImg(request, userName):
     except (User.DoesNotExist, DatabaseError):
         return JsonResponse({"response": False})
     return JsonResponse({"response": user.profileImg})
+
+
+def getAchivments(request, userName):
+    try:
+        user = User.objects.get(userName=userName)
+    except (User.DoesNotExist, DatabaseError):
+        return JsonResponse({"response": False})
+    return JsonResponse({"response": {totalAchivment: user.totalAchivment, achivment: user.achivment}})

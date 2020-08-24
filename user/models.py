@@ -19,6 +19,10 @@ class User(models.Model):
     isStar = models.BooleanField(default=False)
     starReasons = models.TextField(
         "Ragioni punti star", blank=True)
+    totalAchivment = models.TextField(
+        "Punteggi achivment", blank=False)
+    achivment = models.TextField(
+        "Achivment", blank=False)
     profileImg = models.TextField(
         "Url immagine Profilo", blank=True, default="https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png")
 
