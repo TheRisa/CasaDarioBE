@@ -9,6 +9,7 @@ urlpatterns = [
     path('getAllUsers/', views.getAllUsers, name='getAllUser'),
     path('getLastLogin/<userName>', views.getLastLogin, name='getLastLogin'),
     path('getProfileImg/<userName>', views.getProfileImg, name='getProfileImg'),
+    path('getAchivments/<userName>', views.getAchivments, name='getAchivments'),
     path('updateLastLogin/<userName>',
          views.updateLastLogin, name='updateLastLogin'),
     path('updateTotalPoint/<userName>',
