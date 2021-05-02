@@ -220,15 +220,15 @@ def updateTotalPoint(request, userName):
         return JsonResponse({'response': False})
     return JsonResponse({'response': user['totalPoint']})
 
-def initNewYear(request):
-    try:
-        db = connect()
-        userCol = db['user_user']
-        users = userCol.find()
-        for user in users:
-    except BulkWriteError:
-        return JsonResponse({'response': False})
-    return JsonResponse({'response': True})      
+# def initNewYear(request):
+#     try:
+#         db = connect()
+#         userCol = db['user_user']
+#         users = userCol.find()
+#         for user in users:
+#     except BulkWriteError:
+#         return JsonResponse({'response': False})
+#     return JsonResponse({'response': True})      
 
 
 
