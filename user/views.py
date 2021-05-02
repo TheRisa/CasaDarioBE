@@ -69,6 +69,7 @@ def getUser(request, userName):
         "id": user.id,
         "lastName": user.lastName,
         "totalPoint": user.totalPoint,
+        "pointsFrom2020": user.pointsFrom2020,
         "monthPoint": user.monthPoint,
         "gayPoint": user.gayPoint,
         "profileImg": user.profileImg,
@@ -97,6 +98,7 @@ def getAllUsers(request):
     #         "firstName": user.firstName,
     #         "lastName": user.lastName,
     #         "totalPoint": user.totalPoint,
+    #         "pointsFrom2020": user.pointsFrom2020,
     #         "monthPoint": user.monthPoint,
     #         "description": user.description,
     #         "id": user.id,
@@ -110,7 +112,6 @@ def getAllUsers(request):
     try:
         db = conncet()
         userCol = db['user_user']
-        # users = userCol.find({}).sort({"totalPoint": -1})
         users = userCol.find()
         orderedUsers = users.sort([("totalPoint", -1)])
     except DatabaseError:
@@ -122,6 +123,7 @@ def getAllUsers(request):
             "firstName": user['firstName'],
             "lastName": user['lastName'],
             "totalPoint": user['totalPoint'],
+            "pointsFrom2020": user['pointsFrom2020'],
             "monthPoint": user['monthPoint'],
             "description": user['description'],
             "id": user['id'],
@@ -152,6 +154,7 @@ def createUser(request, userName, psw, firstName, lastName):
     # user.description = ""
     # user.gayPoint = 0
     # user.totalPoint = 0
+    # user.pointsFrom2020 = '0'
     # user.monthPoint = 0
     # user.profileImg = "https: // polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png"
     # try:
@@ -202,14 +205,31 @@ def updateTotalPoint(request, userName):
     try:
         db = conncet()
         user = User.objects.get(userName=userName)
+        splittedPoints = user.pointsFrom2020.split(',')
+        splittedPoints[len(splittedPoints) - 2] = str(int(splittedPoints[len(splittedPoints) - 2]) + 1)
+        formattedPoints = ''
+        for point in splittedPoints:
+            if (point != ''):
+                formattedPoints = formattedPoints + point + ','
         userCol = db["user_user"]
         userCol.update_one(
             {"userName": userName},
-            {"$set": {"totalPoint": user.totalPoint + 1, "monthPoint": user.monthPoint + 1}})
+            {"$set": {"totalPoint": user.totalPoint + 1, "monthPoint": user.monthPoint + 1, "pointsFrom2020": formattedPoints}})
         user = userCol.find_one({"userName": userName})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': user['totalPoint']})
+
+def initNewYear(request):
+    try:
+        db = connect()
+        userCol = db['user_user']
+        users = userCol.find()
+        for user in users:
+    except BulkWriteError:
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': True})      
+
 
 
 def restMonthPoint(request):

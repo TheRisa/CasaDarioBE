@@ -9,6 +9,7 @@ class User(models.Model):
     firstName = models.CharField("Nome", max_length=50, blank=False)
     lastName = models.CharField("Cognome", max_length=50, blank=False)
     totalPoint = models.IntegerField("Presenze totali", default=0)
+    pointsFrom2020 = models.TextField("Array dei punti a partire dal 2020", blank=True)
     monthPoint = models.IntegerField("Presenze questo mese", default=0)
     gayPoint = models.IntegerField("Punti gay", default=0)
     description = models.CharField(
