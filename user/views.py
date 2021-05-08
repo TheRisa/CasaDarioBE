@@ -258,3 +258,13 @@ def getAchivments(request, userName):
         return JsonResponse({"response": False})
     response = {"totalAchivment": user.totalAchivment, "achivment": user.achivment}
     return JsonResponse({"response": response})
+
+def updateAchievements(request, userName, achievements):
+    try:
+        db = conncet()
+        userCol = db["user_user"]
+        userCol.update_one(
+            {"userName": userName}, {"$set": {"achivment": achievements}})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': True})
