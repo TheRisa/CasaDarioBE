@@ -200,6 +200,7 @@ def updateLastLogin(request, userName):
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
 
+
 def addGayPoint(request, userName):
     try:
         try:
