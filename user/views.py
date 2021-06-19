@@ -205,7 +205,7 @@ def addGayPoint(request, userName):
         db = conncet()
         user = User.objects.get(userName=userName)
         userCol = db["user_user"]
-        userCol.update_one({"userName": userName}, {"$set": {"gayPoint": (user.gayPoint + 1)})
+        userCol.update_one({"userName": userName}, {"$set": {"gayPoint": user.gayPoint + 1}})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
