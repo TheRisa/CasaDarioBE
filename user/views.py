@@ -203,7 +203,6 @@ def updateLastLogin(request, userName):
 
 def addGayPoint(request, userName):
     try:
-        try:
         db = conncet()
         userCol = db["user_user"]
         user = User.objects.get(userName=userName)
