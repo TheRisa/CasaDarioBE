@@ -194,8 +194,7 @@ def updateLastLogin(request, userName):
     try:
         db = conncet()
         userCol = db["user_user"]
-        userCol.update_one(
-            {"userName": userName}, {"$set": {"lastDate": datetime.datetime.now().isoformat()}})
+        userCol.update_one({"userName": userName}, {"$set": {"lastDate": datetime.datetime.now().isoformat()}})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
@@ -206,8 +205,7 @@ def addGayPoint(request, userName):
         db = conncet()
         userCol = db["user_user"]
         user = User.objects.get(userName=userName)
-        userCol.update_one(
-            {"userName": userName}, {"$set": {"gayPoint": user.gayPoint + 1})
+        userCol.update_one({"userName": userName}, {"$set": {"gayPoint": user.gayPoint + 1})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
