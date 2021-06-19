@@ -11,14 +11,9 @@ urlpatterns = [
     path('getProfileImg/<userName>', views.getProfileImg, name='getProfileImg'),
     path('getAchivments/<userName>', views.getAchivments, name='getAchivments'),
     path('updateAchievements/<userName>/<total>/<achievements>', views.updateAchievements, name='updateAchievements'),
-    path('updateLastLogin/<userName>',
-         views.updateLastLogin, name='updateLastLogin'),
-    path('addGayPoint/<userName>',
-         views.addGayPoint, name='addGayPoint'),
-    path('updateTotalPoint/<userName>',
-         views.updateTotalPoint, name='updateTotalPoint'),
-    path('resetMonthPoint/',
-         views.restMonthPoint, name='resetMonthPoint'),
-    path('createuser/<userName>/<psw>/<firstName>/<lastName>/',
-         views.createUser, name='createUser')
+    path('updateLastLogin/<userName>', views.updateLastLogin, name='updateLastLogin'),
+    path('addGayPoint/<userName>', views.addGayPoint, name='addGayPoint'),
+    path('updateTotalPoint/<userName>', views.updateTotalPoint, name='updateTotalPoint'),
+    path('resetMonthPoint/', views.restMonthPoint, name='resetMonthPoint'),
+    path('createuser/<userName>/<psw>/<firstName>/<lastName>/', views.createUser, name='createUser')
 ]
