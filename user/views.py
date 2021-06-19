@@ -200,6 +200,18 @@ def updateLastLogin(request, userName):
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
 
+def addGayPoint(request, userName):
+    try:
+        try:
+        db = conncet()
+        userCol = db["user_user"]
+        user = User.objects.get(userName=userName)
+        userCol.update_one(
+            {"userName": userName}, {"$set": {"gayPoint": user.gayPoint + 1})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': True})
+
 
 def updateTotalPoint(request, userName):
     try:
