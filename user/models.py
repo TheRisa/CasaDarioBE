@@ -8,6 +8,7 @@ class User(models.Model):
     password = models.CharField("Password", max_length=50, blank=False)
     firstName = models.CharField("Nome", max_length=50, blank=False)
     lastName = models.CharField("Cognome", max_length=50, blank=False)
+    playerId = models.CharField("Id per push notification", max_length=50, blank=True)
     totalPoint = models.IntegerField("Presenze totali", default=0)
     pointsFrom2020 = models.TextField("Array dei punti a partire dal 2020", blank=True)
     monthPoint = models.IntegerField("Presenze questo mese", default=0)

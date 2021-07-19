@@ -68,6 +68,7 @@ def getUser(request, userName):
         "firstName": user.firstName,
         "id": user.id,
         "lastName": user.lastName,
+        "playerId": user.playerId,
         "totalPoint": user.totalPoint,
         "pointsFrom2020": user.pointsFrom2020,
         "monthPoint": user.monthPoint,
@@ -122,6 +123,7 @@ def getAllUsers(request):
             "userName": user['userName'],
             "firstName": user['firstName'],
             "lastName": user['lastName'],
+            "playerId": user['playerId'],
             "totalPoint": user['totalPoint'],
             "pointsFrom2020": user['pointsFrom2020'],
             "monthPoint": user['monthPoint'],
@@ -195,6 +197,15 @@ def updateLastLogin(request, userName):
         db = conncet()
         userCol = db["user_user"]
         userCol.update_one({"userName": userName}, {"$set": {"lastDate": datetime.datetime.now().isoformat()}})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': True})
+
+def updatePlayerId(request, userName, playerId):
+    try:
+        db = conncet()
+        userCol = db["user_user"]
+        userCol.update_one({"userName": userName}, {"$set": {"playerId": playerId)}})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
