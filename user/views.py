@@ -205,7 +205,7 @@ def updatePlayerId(request, userName, playerId):
     try:
         db = conncet()
         userCol = db["user_user"]
-        userCol.update_one({"userName": userName}, {"$set": {"playerId": playerId)}})
+        userCol.update_one({"userName": userName}, {"$set": {"playerId": playerId}})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
