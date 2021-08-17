@@ -13,11 +13,11 @@ class User(models.Model):
     pointsFrom2020 = models.TextField("Array dei punti a partire dal 2020", blank=True)
     monthPoint = models.IntegerField("Presenze questo mese", default=0)
     gayPoint = models.IntegerField("Punti gay", default=0)
+    napoliPoint = models.IntegerField("Punti Napoli", default=0)
     description = models.CharField(
         "Descrizione utente", max_length=50, blank=True)
     lastDate = models.DateTimeField(
         auto_now=False, auto_now_add=False, blank=True)
-    # lastDate = models.CharField("Ultimo accesso", max_length=50, blank=True)
     isStar = models.BooleanField(default=False)
     starReasons = models.TextField(
         "Ragioni punti star", blank=True)

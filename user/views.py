@@ -73,6 +73,7 @@ def getUser(request, userName):
         "pointsFrom2020": user.pointsFrom2020,
         "monthPoint": user.monthPoint,
         "gayPoint": user.gayPoint,
+        "napoliPoint": user.napoliPoint,
         "profileImg": user.profileImg,
         "isStar": user.isStar,
         "starReasons": user.starReasons
@@ -130,6 +131,7 @@ def getAllUsers(request):
             "description": user['description'],
             "id": user['id'],
             "gayPoint": user['gayPoint'],
+            "napoliPoint": user['napoliPoint'],
             "profileImg": user['profileImg'],
             "password": user['password'],
             "isStar": user['isStar'],
@@ -173,7 +175,7 @@ def createUser(request, userName, psw, firstName, lastName):
         userCol = db["user_user"]
         newUser = [
             {"firstName": firstName, "lastName": lastName,
-                "userName": userName, "password": psw, "description": "", "gayPoint": 0,
+                "userName": userName, "password": psw, "description": "", "gayPoint": 0, "napoliPoint": 0,
                 "totalPoint": 0, "monthPoint": 0, "profileImg": "https://polar-tundra-64747.herokuapp.com/static/image/casadario/profile/profile-default.png",
                 "lastDate": "2020-01-10T23:00:00.000+00:00", "id": collection["id_user"], "isStar": False, "starReasons": ""}
         ]
@@ -217,6 +219,17 @@ def addGayPoint(request, userName):
         user = User.objects.get(userName=userName)
         userCol = db["user_user"]
         userCol.update_one({"userName": userName}, {"$set": {"gayPoint": user.gayPoint + 1}})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': True})
+
+
+def addNapoliPoint(request, userName):
+    try:
+        db = conncet()
+        user = User.objects.get(userName=userName)
+        userCol = db["user_user"]
+        userCol.update_one({"userName": userName}, {"$set": {"napoliPoint": user.napoliPoint + 1}})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})

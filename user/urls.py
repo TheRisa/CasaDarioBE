@@ -13,6 +13,7 @@ urlpatterns = [
     path('updateAchievements/<userName>/<total>/<achievements>', views.updateAchievements, name='updateAchievements'),
     path('updateLastLogin/<userName>', views.updateLastLogin, name='updateLastLogin'),
     path('addGayPoint/<userName>', views.addGayPoint, name='addGayPoint'),
+    path('addNapoliPoint/<userName>', views.addNapoliPoint, name='addNapoliPoint'),
     path('updateTotalPoint/<userName>', views.updateTotalPoint, name='updateTotalPoint'),
     path('updatePlayerId/<userName>/<playerId>', views.updatePlayerId, name='updatePlayerId'),
     path('resetMonthPoint/', views.restMonthPoint, name='resetMonthPoint'),
