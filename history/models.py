@@ -17,3 +17,20 @@ class History(models.Model):
 
     def __str__(self):
         return self.name
+
+"""
+Modello per i record
+"""
+
+class Record(models.Model):
+    titolo = models.CharField("Titolo del record",
+                            max_length=100, blank=False, unique=True)
+    user = models.CharField("Nome della storia",
+                            max_length=50, blank=False, unique=True)
+    descrizione = models.CharField("Nome della storia",
+                            max_length=50, blank=False, unique=True)
+    data = models.CharField("Nome della storia",
+                            max_length=50, blank=False, unique=True)
+
+    def __str__(self):
+        return self.titolo
