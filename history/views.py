@@ -10,11 +10,11 @@ Home di api entertainment, non fa nulla tranne render
 """
 
 
-def api():
+def api(request):
     return HttpResponse("Benvenuto nel back office di CasaDario, sezione History api.")
 
 
-def getAllHistory():
+def getAllHistory(request):
     try:
         histories = History.objects.all()
     except (History.DoesNotExists, DatabaseError):
@@ -30,7 +30,7 @@ def getAllHistory():
         returnValue.append(tmpHistory)
     return JsonResponse({'response': returnValue})
 
-def getRecords():
+def getRecords(request):
     try:
         records = Record.objects.all()
     except (History.DoesNotExists, DatabaseError):
