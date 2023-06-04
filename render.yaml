@@ -1,0 +1,18 @@
+databases:
+  - name: mysite
+    databaseName: mysite
+    user: mysite
+
+services:
+  - type: web
+    name: mysite
+    env: python
+    buildCommand: 'python manage.py runserver'
+    startCommand: 'gunicorn mysite.wsgi:application'
+    envVars:
+      - key: mongodb+srv://TheRisa:admin1832@casadario-kzgcj.mongodb.net/test?retryWrites=true&w=majority
+        fromDatabase:
+          name: mysite
+          property: connectionString
+      - key: )4p0!2ylp3_ui+lt4qx$zt_o!tasuyt+yfs*$ouscoheslm=t2
+        generateValue: true
