@@ -27,7 +27,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://casadario-be.onrender.com']
+ALLOWED_HOSTS = ['api.render.com/deploy/srv-chrjn1bhp8ud4n72ct80', '127.0.0.1', 'localhost']
 
 
 # CORS Config
