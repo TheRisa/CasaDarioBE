@@ -300,7 +300,7 @@ def getAchivments(request, userName):
         user = userCol.find_one({'userName': userName})
     except (User.DoesNotExist, DatabaseError):
         return JsonResponse({"response": False})
-    response = {"totalAchivment": user.totalAchivment, "achivment": user.achivment}
+    response = {"totalAchivment": user['totalAchivment'], "achivment": user['achivment']}
     return JsonResponse({"response": response})
 
 def updateAchievements(request, userName, total, achievements):
