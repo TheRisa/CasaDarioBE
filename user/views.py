@@ -61,24 +61,26 @@ return json di tutti i dati dell"utente
 
 def getUser(request, userName):
     try:
-        user = User.objects.get(userName=userName)
+        db = conncet()
+        userCol = db['user_user']
+        user = userCol.find_one({'userName': userName})
     except (User.DoesNotExist, DatabaseError):
         return JsonResponse({"response": False})
     return JsonResponse({"response": {
-        "userName": user.userName,
-        "description": user.description,
-        "firstName": user.firstName,
-        "id": user.id,
-        "lastName": user.lastName,
-        "playerId": user.playerId,
-        "totalPoint": user.totalPoint,
-        "pointsFrom2020": user.pointsFrom2020,
-        "monthPoint": user.monthPoint,
-        "gayPoint": user.gayPoint,
-        "napoliPoint": user.napoliPoint,
-        "profileImg": user.profileImg,
-        "isStar": user.isStar,
-        "starReasons": user.starReasons
+        "userName": user['userName'],
+        "description": user['description'],
+        "firstName": user['firstName'],
+        "id": user['id'],
+        "lastName": user['lastName'],
+        "playerId": user['playerId'],
+        "totalPoint": user['totalPoint'],
+        "pointsFrom2020": user['pointsFrom2020'],
+        "monthPoint": user['monthPoint'],
+        "gayPoint": user['gayPoint'],
+        "napoliPoint": user['napoliPoint'],
+        "profileImg": user['profileImg'],
+        "isStar": user['isStar'],
+        "starReasons": user['starReasons']
     }})
 
 
@@ -218,9 +220,9 @@ def updatePlayerId(request, userName, playerId):
 def addGayPoint(request, userName):
     try:
         db = conncet()
-        user = User.objects.get(userName=userName)
         userCol = db["user_user"]
-        userCol.update_one({"userName": userName}, {"$set": {"gayPoint": user.gayPoint + 1}})
+        user = userCol.find_one({'userName': userName})
+        userCol.update_one({"userName": userName}, {"$set": {"gayPoint": user['gayPoint'] + 1}})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
@@ -229,9 +231,9 @@ def addGayPoint(request, userName):
 def addNapoliPoint(request, userName):
     try:
         db = conncet()
-        user = User.objects.get(userName=userName)
         userCol = db["user_user"]
-        userCol.update_one({"userName": userName}, {"$set": {"napoliPoint": user.napoliPoint + 1}})
+        user = userCol.find_one({'userName': userName})
+        userCol.update_one({"userName": userName}, {"$set": {"napoliPoint": user['napoliPoint'] + 1}})
     except BulkWriteError:
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
@@ -240,8 +242,9 @@ def addNapoliPoint(request, userName):
 def updateTotalPoint(request, userName):
     try:
         db = conncet()
-        user = User.objects.get(userName=userName)
-        splittedPoints = user.pointsFrom2020.split(',')
+        userCol = db["user_user"]
+        user = userCol.find_one({'userName': userName})
+        splittedPoints = user['pointsFrom2020'].split(',')
         splittedPoints[len(splittedPoints) - 2] = str(int(splittedPoints[len(splittedPoints) - 2]) + 1)
         formattedPoints = ''
         for point in splittedPoints:
@@ -250,7 +253,7 @@ def updateTotalPoint(request, userName):
         userCol = db["user_user"]
         userCol.update_one(
             {"userName": userName},
-            {"$set": {"totalPoint": user.totalPoint + 1, "monthPoint": user.monthPoint + 1, "pointsFrom2020": formattedPoints}})
+            {"$set": {"totalPoint": user['totalPoint'] + 1, "monthPoint": user['monthPoint'] + 1, "pointsFrom2020": formattedPoints}})
         user = userCol.find_one({"userName": userName})
     except BulkWriteError:
         return JsonResponse({'response': False})
