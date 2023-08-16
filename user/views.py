@@ -43,7 +43,7 @@ def logIn(request, userName, psw):
     try:
         db = conncet()
         userCol = db['user_user']
-        user = userCol.find({'userName': userName})
+        user = userCol.find_one({'userName': userName})
         if (user['password'] == psw):
             return JsonResponse({"response": True})
         else:
