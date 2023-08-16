@@ -41,8 +41,10 @@ Return true se corrispondono
 
 def logIn(request, userName, psw):
     try:
-        user = User.objects.get(userName=userName)
-        if (user.password == psw):
+        db = conncet()
+        userCol = db['user_user']
+        user = userCol.find({'userName': userName})
+        if (user['password'] == psw):
             return JsonResponse({"response": True})
         else:
             return JsonResponse({"response": False})
