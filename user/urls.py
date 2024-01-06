@@ -15,6 +15,7 @@ urlpatterns = [
     path('addGayPoint/<userName>', views.addGayPoint, name='addGayPoint'),
     path('addNapoliPoint/<userName>', views.addNapoliPoint, name='addNapoliPoint'),
     path('updateTotalPoint/<userName>', views.updateTotalPoint, name='updateTotalPoint'),
+    path('addNewYear/<userName>', views.addNewYear, name='addNewYear'),
     path('updatePlayerId/<userName>/<playerId>', views.updatePlayerId, name='updatePlayerId'),
     path('resetMonthPoint/', views.restMonthPoint, name='resetMonthPoint'),
     path('createuser/<userName>/<psw>/<firstName>/<lastName>/', views.createUser, name='createUser')

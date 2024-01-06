@@ -281,6 +281,18 @@ def restMonthPoint(request):
         return JsonResponse({'response': False})
     return JsonResponse({'response': True})
 
+def addNewYear(request, userName):
+    try:
+        db = conncet()
+        userCol = db["user_user"]
+        user = userCol.find_one({'userName': userName})
+        userCol.update_one(
+            {"userName": userName},
+            {"$set": {"pointsFrom2020": user["pointsFrom2020"] + "0,"}})
+    except BulkWriteError:
+        return JsonResponse({'response': False})
+    return JsonResponse({'response': True})
+
 
 # Non ci sono immagini per ora
 def getProfileImg(request, userName):
